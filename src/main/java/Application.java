@@ -1,7 +1,13 @@
+import org.eclipse.jetty.server.Server;
+
 public class Application {
 
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-    }
+  public static void main(String[] args) throws Exception {
+    Server server = new Server(8080);
+    server.setHandler(new HelloHandler());
+
+    server.start();
+    server.join();
+  }
 
 }
