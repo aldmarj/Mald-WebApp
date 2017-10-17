@@ -21,11 +21,12 @@ cache:
 stages:
   - build
   - package
+  - deploy
 
 maven-build:
   image: maven:3.5.0-jdk-8-slim
   stage: build
-  script: "mvn $MAVEN_CLI_OPTS package -B"
+  script: "mvn $MAVEN_CLI_OPTS clean verify -B"
   artifacts:
     paths:
       - target/*.jar
@@ -36,3 +37,18 @@ docker-build:
   - docker build -t registry.gitlab.com/distributed-mald/website .
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
   - docker push registry.gitlab.com/distributed-mald/website
+
+docker-deploy:
+  image: sahsu/docker-ecs-cli
+  stage: deploy
+  script:
+  # used https://web.archive.org/web/20171017220027/https://serradev.wordpress.com/2017/05/11/cluster-of-docker-containers-in-aws-ecs-via-gitlab-pipelines/
+    - ecs-cli configure --region eu-west-2 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster mald-website-cluster
+    # --size defaults to 1, --instance-type defaults to t2.micro
+    - ecs-cli up --keypair gitlab-ci --capability-iam --vpc vpc-19e45970 --subnets subnet-1ccc6d67,subnet-f98079b4
+    - ecs-cli compose service up --target-group-arn $PROD_TARGET_GROUP_ARN --container-name website --container-port 8080 --role ecsServiceRole
+  environment:
+    name: production
+    url: $PROD_LOAD_BALANCER_URL
+  only:
+    - master

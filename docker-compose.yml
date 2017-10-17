@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  website:
+    image: registry.gitlab.com/distributed-mald/website:latest
+    ports:
+      - "80:8080"
