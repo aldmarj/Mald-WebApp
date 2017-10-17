@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>distributed-mald</groupId>
   <artifactId>website</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>website Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -18,6 +18,11 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlets</artifactId>
+      <version>9.4.7.v20170914</version>
     </dependency>
   </dependencies>
   <build>
