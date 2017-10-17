@@ -50,5 +50,5 @@ docker-deploy:
   environment:
     name: production
     url: $PROD_LOAD_BALANCER_URL
-  only:
-    - master
+#  only:
+#    - master
