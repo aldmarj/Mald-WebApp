@@ -50,7 +50,7 @@ docker-deploy:
   script:
     - ecs-cli configure --region eu-west-2 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster mald-website-cluster
     # --size defaults to 1, --instance-type defaults to t2.micro
-    - ecs-cli up --keypair gitlab-ci --instance-role EMR_DefaultRole --vpc vpc-19e45970 --subnets subnet-1ccc6d67,subnet-f98079b4
+    - ecs-cli up --force --keypair gitlab-ci --instance-role EMR_DefaultRole --vpc vpc-19e45970 --subnets subnet-1ccc6d67,subnet-f98079b4
     - ecs-cli compose service up --target-group-arn $PROD_TARGET_GROUP_ARN --container-name website --container-port 8080 --role ecsServiceRole
   environment:
     name: production
