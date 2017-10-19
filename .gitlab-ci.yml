@@ -43,8 +43,10 @@ docker-build:
   - docker logout
 
 docker-deploy:
-  image: kroniak/ssh-client:latest
+  image: alpine:3.6
   stage: deploy
+  before_script:
+    - apk add --no-cache openssh-client bash
   script:
     - ./deploy.sh
   environment:
