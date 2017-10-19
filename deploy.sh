@@ -14,7 +14,7 @@ ssh -p 8421 $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP "docker login -u gitlab-ci-tok
 "docker-compose stop;"\
 "docker-compose rm website --force;"\
 "docker pull ${CI_REGISTRY}/${CI_PROJECT_PATH}:latest;"\
-"docker-compose up -d"\
-"docker logout"
+"docker-compose up -d;"\
+"docker logout ${CI_REGISTRY}"
 
 
