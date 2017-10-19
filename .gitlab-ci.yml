@@ -40,7 +40,7 @@ docker-build:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
-  - docker logout
+  - docker logout $CI_REGISTRY
 
 docker-deploy:
   image: alpine:3.6
@@ -49,8 +49,6 @@ docker-deploy:
     - apk add --no-cache openssh-client bash
   script:
     - ./deploy.sh
-  environment:
-    name: production
-    url: $PROD_LOAD_BALANCER_URL
-#  only:
-#    - master
+  environment: production
+  only:
+    - master
