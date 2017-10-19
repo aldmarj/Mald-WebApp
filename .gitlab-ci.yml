@@ -42,8 +42,7 @@ docker-build:
   - docker logout
 
 docker-deploy:
-  # used https://web.archive.org/web/20171017220027/https://serradev.wordpress.com/2017/05/11/cluster-of-docker-containers-in-aws-ecs-via-gitlab-pipelines/
-  image: alpine:latest
+  image: kroniak/ssh-client:latest
   stage: deploy
   script:
     - ./deploy.sh
