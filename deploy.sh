@@ -9,7 +9,7 @@ ssh-add <(echo "$DEPLOY_SSH_PRIVATE_KEY")
 mkdir -p ~/.ssh
 ssh-keyscan -H -p 8421 $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
 
-scp -r ./docker-compose.autodeploy.yml $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:~/
+scp -r ./docker-compose.yml $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:~/
 ssh $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN ${CI_REGISTRY};"\
 "docker-compose stop;"\
 "docker-compose rm website --force;"\
