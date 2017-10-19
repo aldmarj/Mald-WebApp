@@ -33,29 +33,41 @@
     </dependency>
   </dependencies>
 
-
-
   <build>
     <finalName>website</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.0.2</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>${mainClass}</mainClass>
-                </manifest>
-              </archive>
+              <outputDirectory>
+                ${project.build.directory}/libs
+              </outputDirectory>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
       <!-- For use with mvn exec:java command -->
       <plugin>
