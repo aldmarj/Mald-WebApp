@@ -34,24 +34,19 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/distributed-mald/website .
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/distributed-mald/website
+  - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA .
+  - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH:latest
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
+  - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
+  - docker logout
 
 docker-deploy:
   # used https://web.archive.org/web/20171017220027/https://serradev.wordpress.com/2017/05/11/cluster-of-docker-containers-in-aws-ecs-via-gitlab-pipelines/
-  image: python:3-alpine
+  image: alpine:latest
   stage: deploy
-  before_script:
-  ##### Install the AWS ECS-CLI #####
-    - apk add --update curl
-    - curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-    - chmod +x /usr/local/bin/ecs-cli
   script:
-    - ecs-cli configure --region eu-west-2 --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster mald-website-cluster
-    # --size defaults to 1, --instance-type defaults to t2.micro
-    - ecs-cli up --force --keypair gitlab-ci --instance-role EMR_DefaultRole --vpc vpc-19e45970 --subnets subnet-1ccc6d67,subnet-f98079b4
-    - ecs-cli compose service up --target-group-arn $PROD_TARGET_GROUP_ARN --container-name website --container-port 8080 --role ecsServiceRole
+    - ./deploy.sh
   environment:
     name: production
     url: $PROD_LOAD_BALANCER_URL
