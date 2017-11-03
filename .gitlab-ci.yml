@@ -29,7 +29,7 @@ maven-verify:
   script: "mvn $MAVEN_CLI_OPTS clean verify -B"
   artifacts:
     paths:
-      - target/*.jar
+      - target/website.war
 
 docker-push:
   stage: push
