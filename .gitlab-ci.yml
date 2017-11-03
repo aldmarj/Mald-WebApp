@@ -30,7 +30,6 @@ maven-verify:
   artifacts:
     paths:
       - target/*.jar
-      - target/libs
 
 docker-push:
   stage: push
