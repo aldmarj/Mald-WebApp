@@ -53,3 +53,4 @@ docker-deploy:
   environment: production
   only:
     - master
+  when: manual
