@@ -13,7 +13,7 @@ public class SpringBootWebApplication {
   /**
    * Value provided from application-{environment}.properties file
    */
-  @Value("api.rootUri")
+  @Value("${api.rootUri}")
   private String apiRootUri;
 
   public static void main(String[] args) {
