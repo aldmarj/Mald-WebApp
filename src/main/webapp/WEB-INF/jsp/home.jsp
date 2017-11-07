@@ -35,7 +35,9 @@
 				$(businesses).each(function(i, business) {
 					$('<tr/>').appendTo(table)
 						.append($('<td/>').text(business.businessName))
-							.append($('<td/>').text(business.businessTag));
+							.append($('<td/>').html(
+									"<a href=" + window.location.href + "/" + business.businessTag + ">"
+										+ business.businessTag + "</a>"));
 			});
 		});
 	</script>
