@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class SpringBootWebApplication {
 
+  /**
+   * Value provided from application-{environment}.properties file
+   */
   @Value("api.rootUri")
   private String apiRootUri;
 
@@ -17,6 +20,10 @@ public class SpringBootWebApplication {
     SpringApplication.run(SpringBootWebApplication.class, args);
   }
 
+  /**
+   * Bean definition that returns a preconfigured RestTemplate.
+   * Useful for @Autowire declarations, see {@link website.service.BaseService}
+   */
   @Bean
   public RestTemplate restTemplate(RestTemplateBuilder builder) {
     return builder.rootUri(apiRootUri).build();
