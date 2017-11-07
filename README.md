@@ -1,5 +1,5 @@
 # Welcome...
-### To the best project in distributed-mald!
+### To the 2nd best project in distributed-mald!
 
 But not just because it has a Dilbert comic...
 
