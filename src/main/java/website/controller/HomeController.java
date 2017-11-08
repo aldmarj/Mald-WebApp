@@ -37,10 +37,10 @@ public class HomeController {
 	    model.addAttribute("businesses", businesses);
 	    
 	    // Get the possible new business
-		// set default value
 		Business business = new Business();
-		business.setBusinessName("businessName");
-		business.setBusinessTag("businessTag");
+		// set default value
+		business.setBusinessName("Name");
+		business.setBusinessTag("Tag");
 		model.addAttribute("business", business);
 		
 		return "home";

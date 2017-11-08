@@ -38,19 +38,15 @@
 		</table>
 		<p>Want to add yourself?</p>
         <form:form method="POST" action="/businesses" modelAttribute="business">
-             <table>
-                <tr>
-                    <td><form:label path="businessName">Name</form:label></td>
-                    <td><form:input path="businessName"/></td>
-                </tr>
-                <tr>
-                    <td><form:label path="businessTag">Tag</form:label></td>
-                    <td><form:input path="businessTag"/></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Submit"/></td>
-                </tr>
-            </table>
+             <div class="form-group">
+					<form:label path="businessName">Name</form:label>
+                    <form:input path="businessName" class="form-control"/>
+			 </div>
+			 <div class="form-group">
+                    <form:label path="businessTag">Tag</form:label>
+                    <form:input path="businessTag" class="form-control"/>
+			 </div>
+  			 <button type="submit" class="btn btn-default">Submit</button>
         </form:form>
 	</div>
 </body>
