@@ -43,13 +43,19 @@ docker-push:
   only:
     - master
 
-docker-deploy:
-  image: alpine:3.6
+k8s-deploy:
+  image: google/cloud-sdk
   stage: deploy
-  before_script:
-    - apk add --no-cache openssh-client bash
   script:
-    - ./deploy.sh
+  - echo "$GCLOUD_KEY" > key.json
+  - gcloud auth activate-service-account --key-file key.json
+  - gcloud config set compute/zone europe-west2-a
+  - gcloud config set project distributed-mald
+  - gcloud config set container/use_client_certificate True
+  - gcloud container clusters get-credentials website-cluster
+  - kubectl delete secret registry.gitlab.com
+  - kubectl create secret docker-registry $CI_REGISTRY --docker-server=https://$CI_REGISTRY --docker-username=gitlab-ci-token --docker-password=$CI_BUILD_TOKEN --docker-email=ddhoney97@hotmail.co.uk
+  - kubectl apply -f k8s-deployment.yml
   environment: production
   only:
     - master
