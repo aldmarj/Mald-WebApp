@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+	
 <html>
 <head>
 <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
@@ -9,8 +11,7 @@
 <body>
 	<div class="container">
 		<h2>Employee Management System</h2>
-		<p>Welcome to the Employee Management System, we currently
-			support:</p>
+		<p>Welcome to the Employee Management System, we currently support:</p>
 
 		<div>
 			<table id="business-table" class="table table-striped">
@@ -20,26 +21,22 @@
 						<th>Business Tag</th>
 					</tr>
 				</thead>
+				<tbody>
+					<c:forEach items="${businesses}" var="business">   
+						<tr>
+							<td>
+							   	<c:out value="${business.businessName}" />
+							</td>
+							<td>
+								<a href="${pageContext.request.contextPath}/${business.businessTag}">
+									<c:out value="${business.businessTag}" />
+								</a>	
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
 	</div>
-
-	<script>
-		//json from the servlet
-		var businesses = 
-			JSON.parse('[{"businessName":"baesystems","businessTag":"bae"},{"businessName":"tbusinessName","businessTag":"ttag"}]');
-
-		$(document).ready(function() {
-				var table = $('#business-table');
-				
-				$(businesses).each(function(i, business) {
-					$('<tr/>').appendTo(table)
-						.append($('<td/>').text(business.businessName))
-							.append($('<td/>').html(
-									"<a href=" + window.location.href + "/" + business.businessTag + ">"
-										+ business.businessTag + "</a>"));
-			});
-		});
-	</script>
 </body>
 </html>
