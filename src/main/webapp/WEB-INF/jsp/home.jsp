@@ -13,30 +13,29 @@
 		<h2>Employee Management System</h2>
 		<p>Welcome to the Employee Management System, we currently support:</p>
 
-		<div>
-			<table id="business-table" class="table table-striped">
-				<thead>
+		<table id="business-table" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Business Name</th>
+					<th>Business Tag</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${businesses}" var="business">   
 					<tr>
-						<th>Business Name</th>
-						<th>Business Tag</th>
+						<td>
+						   	<c:out value="${business.businessName}" />
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/${business.businessTag}">
+								<c:out value="${business.businessTag}" />
+							</a>	
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${businesses}" var="business">   
-						<tr>
-							<td>
-							   	<c:out value="${business.businessName}" />
-							</td>
-							<td>
-								<a href="${pageContext.request.contextPath}/${business.businessTag}">
-									<c:out value="${business.businessTag}" />
-								</a>	
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+				</c:forEach>
+			</tbody>
+		</table>
+		<p>Want your business here to? contact us at 00000 000000 for pricing options.</p>
 	</div>
 </body>
 </html>
