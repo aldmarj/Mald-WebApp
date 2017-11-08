@@ -40,8 +40,8 @@ docker-push:
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
   - docker logout $CI_REGISTRY
-  only:
-    - master
+#  only:
+#    - master
 
 k8s-deploy:
   image: google/cloud-sdk
