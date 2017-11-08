@@ -19,4 +19,9 @@ public class BusinessService extends BaseService {
     return new HashSet<>(Arrays.asList(response));
   }
 
+  public void addBusiness(Business business) {
+	  restTemplate.postForObject("/business/",
+				    	business,
+				      	Business[].class);
+  }
 }

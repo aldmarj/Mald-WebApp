@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 	
 <html>
 <head>
@@ -35,7 +36,22 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<p>Want your business here to? contact us at 00000 000000 for pricing options.</p>
+		<p>Want to add yourself?</p>
+        <form:form method="POST" action="/businesses" modelAttribute="business">
+             <table>
+                <tr>
+                    <td><form:label path="businessName">Name</form:label></td>
+                    <td><form:input path="businessName"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="businessTag">Tag</form:label></td>
+                    <td><form:input path="businessTag"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+        </form:form>
 	</div>
 </body>
 </html>
