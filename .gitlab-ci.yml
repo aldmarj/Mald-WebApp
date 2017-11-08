@@ -57,6 +57,6 @@ k8s-deploy:
   - kubectl create secret docker-registry $CI_REGISTRY --docker-server=https://$CI_REGISTRY --docker-username=gitlab-ci-token --docker-password=$CI_BUILD_TOKEN --docker-email=ddhoney97@hotmail.co.uk
   - kubectl apply -f k8s-deployment.yml
   environment: production
-  only:
-    - master
+#  only:
+#    - master
   when: manual
