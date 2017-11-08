@@ -14,7 +14,7 @@ public class LogWorkServiceImpl extends BaseService implements LogWorkService {
   @Override
   public Set<Client> getClients(String businessTag) {
     Client[] response = restTemplate
-        .getForObject("/business/{businessTag}/clients/",
+        .getForObject("/business/{businessTag}/clientId/",
             Client[].class,
             businessTag
         );
