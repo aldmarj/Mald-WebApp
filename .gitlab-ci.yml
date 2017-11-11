@@ -53,8 +53,6 @@ k8s-deploy:
   - gcloud config set project distributed-mald
   - gcloud config set container/use_client_certificate True
   - gcloud container clusters get-credentials website-cluster
-  - kubectl delete --ignore-not-found=true secret registry.gitlab.com
-  - kubectl create secret docker-registry $CI_REGISTRY --docker-server=https://$CI_REGISTRY --docker-username=gitlab-ci-token --docker-password=$CI_BUILD_TOKEN --docker-email=ddhoney97@hotmail.co.uk
   - kubectl apply -f k8s-deployment.yml
   environment: production
 #  only:
