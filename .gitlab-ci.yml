@@ -58,3 +58,4 @@ k8s-deploy:
 #  only:
 #    - master
   when: manual
+  allow_failure: false
