@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mald-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: distributed-mald-website
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  tls:
+  - secretName: mald-tls-secret
+  backend:
+    serviceName: website-service
+    servicePort: 80
