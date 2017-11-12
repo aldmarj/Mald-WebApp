@@ -16,6 +16,7 @@ spec:
         ports:
         - containerPort: 8080
         env:
-          JAVA_OPTIONS: '-Xmx100m'
+        - name: JAVA_OPTIONS
+          value : '-Xmx100m'
       imagePullSecrets:
         - name: registry.gitlab.com
