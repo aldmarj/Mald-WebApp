@@ -40,8 +40,8 @@ docker-push:
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_SHA
   - docker push $CI_REGISTRY/$CI_PROJECT_PATH:latest
   - docker logout $CI_REGISTRY
-#  only:
-#    - master
+  only:
+    - master
 
 k8s-deploy:
   image: google/cloud-sdk
@@ -53,7 +53,7 @@ k8s-deploy:
   - gcloud container clusters get-credentials website-cluster --project distributed-mald --zone europe-west2-a
   - /bin/sh k8s-deploy.sh
   environment: production
-#  only:
-#    - master
+  only:
+    - master
   when: manual
   allow_failure: false
