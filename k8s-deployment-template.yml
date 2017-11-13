@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: website-deployment
 spec:
-  replicas: 2
   template:
     metadata:
       labels:
@@ -11,7 +10,7 @@ spec:
     spec:
       containers:
       - name: website
-        image: registry.gitlab.com/distributed-mald/website:latest
+        image: registry.gitlab.com/distributed-mald/website:${CI_COMMIT_SHA}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

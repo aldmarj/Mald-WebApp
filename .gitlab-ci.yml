@@ -47,13 +47,7 @@ k8s-deploy:
   image: google/cloud-sdk
   stage: deploy
   script:
-  - echo "$GCLOUD_KEY" > key.json
-  - gcloud auth activate-service-account --key-file key.json
-  - gcloud config set compute/zone europe-west2-a
-  - gcloud config set project distributed-mald
-  - gcloud config set container/use_client_certificate True
-  - gcloud container clusters get-credentials website-cluster
-  - kubectl apply -f k8s-deployment.yml
+  - /bin/sh k8s-deploy.sh
   environment: production
 #  only:
 #    - master
