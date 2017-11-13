@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: mald-ingress
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: distributed-mald-website
     kubernetes.io/ingress.allow-http: "false"
 spec:
   tls:
