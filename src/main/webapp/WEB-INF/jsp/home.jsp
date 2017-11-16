@@ -11,8 +11,15 @@
 </head>
 <body>
 	<div class="container">
+		<br>
+	    <c:if test="${not empty error}">
+			<div class="alert alert-danger">
+			  <strong>Error!</strong> ${error}
+			</div>
+	    </c:if>       
+	
 		<h2>Employee Management System</h2>
-		<p>Welcome to the Employee Management System, we currently support:</p>
+		<p>Welcome to the Employee Management System! We currently support:</p>
 
 		<table id="business-table" class="table table-striped">
 			<thead>
@@ -36,7 +43,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<p>Want to add yourself?</p>
+		
+		<p>Join us today!</p>
         <form:form method="POST" action="/businesses" modelAttribute="business">
              <div class="form-group">
 					<form:label path="businessName">Name</form:label>

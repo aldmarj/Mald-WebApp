@@ -2,15 +2,15 @@ package website.controller;
 
 import java.util.Set;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import website.model.Business;
 import website.service.BusinessService;
@@ -47,14 +47,19 @@ public class HomeController {
 	}
 	
 	@PostMapping("/businesses")
-    public String addBusiness(@Valid @ModelAttribute("business")Business business, 
-      BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "error";
+    public String addBusiness(@ModelAttribute("business")Business business, 
+    		Model model, RedirectAttributes redirectAttributes) 
+	{
+        ResponseEntity<String> response = businessService.addBusiness(business);
+        if(response.getStatusCode() == HttpStatus.BAD_REQUEST)
+        {
+        	// Report the failure to the user.
+        	redirectAttributes.addFlashAttribute("error", response.getBody());
+        	return "redirect:/businesses";
         }
-        
-        businessService.addBusiness(business);
-
+    	
+        // Report success to the user.
+    	redirectAttributes.addFlashAttribute("success", response.getBody());
 		return "redirect:/" + business.getBusinessTag();
     }
 }
