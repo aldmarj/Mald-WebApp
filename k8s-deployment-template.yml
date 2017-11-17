@@ -17,5 +17,7 @@ spec:
         env:
         - name: JAVA_OPTIONS
           value : '-Xmx100m'
+        - name: SPRING_PROFILES_ACTIVE
+          value : 'production'
       imagePullSecrets:
         - name: registry.gitlab.com
