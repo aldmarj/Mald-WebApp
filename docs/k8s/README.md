@@ -10,8 +10,8 @@ It is possible to reserve a static IP address in GKE, but the steps below automa
 
 **Steps**
 1. Create a cluster on Google Container Engine, region: `europe-west2` (London), size: 1, instance type: `g1-small`, node version: `1.8.2-gke.0`
-2. Create a Kubernetes TLS Secret: `kubectl create secret generic mald-tls-secret --client-certificate="<your-fullchain.pem-file>" --client-key="<your-privkey.pem-file>"`
-3. Create a Kubernetes docker-registry Secret: `kubectl create secret docker-registry gitlab.registry.com --docker-server=registry.gitlab.com --docker-username=gitlab-ci-token --docker-password=<gitlab personal access token> --docker-email=<your gitlab email>` so Kubernetes can pull from the Gitlab project's container registry.
+2. Create a Kubernetes [TLS Secret](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) using [mald-tls-secret.yaml](docs/k8s/mald-tls-secret.yaml) as a template. 
+3. Create a Kubernetes docker-registry Secret: `kubectl create secret docker-registry registry.gitlab.com --docker-server=registry.gitlab.com --docker-username=gitlab-ci-token --docker-password=<gitlab personal access token> --docker-email=<your gitlab email>` so Kubernetes can pull from the Gitlab project's private container registry.
 4. Create a Kubernetes [Service](https://kubernetes.io/docs/concepts/services-networking/service/) (`kubectl create -f <your-yaml-file>`) based on [mald-service.yaml](docs/k8s/mald-service.yaml). `spec.selector` specifies the Pods to include in the Service.
 5. Create a Kubernetes [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) (`kubectl create -f <your-yaml-file>`) based on [mald-ingress.yaml](docs/k8s/mald-ingress.yaml). `spec.backend` specifies the previously created Service as the default service to forward requests to. Creating this Ingress will create 1 GCE forwarding rule (HTTPS only) which costs $22.50 a month. A static IP address will also be assigned automatically.   
 Notice how `spec.tls.secretName` matches step 2's secret name `mald-tls-secret`
@@ -24,9 +24,9 @@ In the `k8s-deployment-template.yml` file, notice how `spec.template.metadata.la
 ### Explanation
 #### Instance types
 
-To avoid all the Pod scheduling issues I had and my cluster dying, avoiding Google's `f1-micro` instance type like the plague worked wonders.  
+To avoid all the Pod scheduling issues I had with my cluster dying, avoiding Google's `f1-micro` instance type like the plague worked wonders.  
 
-These machines only have 0.6GB of RAM each, and can only use 0.2 vCPU (these vCPUs are shared amongst other customers). Whenever I managed to get a deployment working, the app was only healthy for about 1 minute before either an Out Of Memory exception occurred, or none of the `f1-micro` nodes were ready due to lack of available CPU cycles.  
+These machines only have 0.6GB of RAM each, and can only use 0.2 vCPU (these vCPUs are shared amongst other customers). Whenever I managed to get a deployment working, the app was only healthy for about 1 minute before either an Out Of Memory exception occurred in all Pod replicas, or none of the `f1-micro` nodes were ready due to lack of available CPU cycles.  
 
 When initially creating the cluster through the Google Cloud Platform, I had to specify a minimum of 3 nodes.
 
@@ -40,7 +40,7 @@ I am not using Autoscaling since I want to demonstrate to David the flexibility 
 
 #### k8s-deploy.sh
 
-A simpler way to write a Gitlab CI job deploy job would be NOT templating `k8s-deployment-template.yml` and just use the image's `:latest` tag (see commit ecc528ed and file `k8s-deployment-template.yml`).   
+A simpler way to write a Gitlab CI job deploy job would be NOT templating `k8s-deployment-template.yml` and just use the image's `:latest` tag (see commit ecc528ed - file `k8s-deployment-template.yml`).   
 
 I did try this for a while, but it's not good practise for dealing with dodgy Deployments (e.g. app crashing on start) - if the `k8s-deploy` CI job is ran again on an earlier commit, Kubernetes will still pull the `:latest` image and still perform a dodgy Deployment. The same thing happens using `kubectl rollout undo deployment ...`.   
 
