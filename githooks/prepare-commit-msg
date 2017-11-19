@@ -1,0 +1,10 @@
+#!/bin/sh
+
+NAME=$(git branch | grep '*' | sed 's/* //')
+# Add hash to start of branch name if not exists
+# This ensures Gitlab shows commits on the issue
+if [[ "$NAME" =~ "^#" ]];
+  then MSG_PREFIX="$NAME";
+  else MSG_PREFIX='#'"$NAME";
+fi
+echo -n "$MSG_PREFIX"': '|cat - "$1" > /tmp/out && mv /tmp/out "$1"
