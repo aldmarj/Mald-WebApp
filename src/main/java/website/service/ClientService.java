@@ -9,9 +9,8 @@ import org.springframework.web.client.RestTemplate;
 import website.model.Client;
 
 @Service
-public class LogWorkService extends BaseService implements LogWorkService {
+public class ClientService extends BaseService {
 
-  @Override
   public Set<Client> getClients(String businessTag) {
     Client[] response = restTemplate
         .getForObject("/business/{businessTag}/clientId/",
