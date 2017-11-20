@@ -7,6 +7,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import handlers.EMSResponseErrorHandler;
+
 @SpringBootApplication
 public class SpringBootWebApplication {
 
@@ -26,7 +28,9 @@ public class SpringBootWebApplication {
    */
   @Bean
   public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder.rootUri(apiRootUri).build();
+	  RestTemplate restTemplate = builder.rootUri(apiRootUri).build();
+	  restTemplate.setErrorHandler(new EMSResponseErrorHandler());
+	  return restTemplate;
   }
 
 }
