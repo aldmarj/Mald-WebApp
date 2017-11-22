@@ -1,4 +1,4 @@
-package handlers;
+package website.handlers;
 
 import java.io.IOException;
 

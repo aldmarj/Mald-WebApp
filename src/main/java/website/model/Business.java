@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Business
 {
-	/** The business tag, also acts as the unique identifie */
+	/** The business tag, also acts as the unique identifier */
     private String businessTag;
 
     /** The full name of the business */
