@@ -14,6 +14,12 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 30
         env:
         - name: JAVA_OPTIONS
           value : '-Xmx100m'
