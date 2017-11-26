@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: website-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      containers:
+      - name: website
+        image: registry.gitlab.com/distributed-mald/website:${CI_COMMIT_SHA}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTIONS
+          value : '-Xmx100m'
+        - name: SPRING_PROFILES_ACTIVE
+          value : 'production'
+      imagePullSecrets:
+        - name: registry.gitlab.com
