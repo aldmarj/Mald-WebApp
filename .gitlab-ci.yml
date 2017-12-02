@@ -22,6 +22,7 @@ stages:
   - verify
   - push
   - deploy
+  - test
 
 maven-verify:
   image: maven:3.5.0-jdk-8-slim
@@ -55,3 +56,15 @@ k8s-deploy:
   environment: production
   only:
     - master
+
+postman-deployment-test:
+  image: node:argon-alpine
+  stage: test
+  before_script:
+  - npm install -g newman
+  script:
+  - cd src/test/postman/
+  - newman run deployment-test.json
+  only:
+    - master
+
