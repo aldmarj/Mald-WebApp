@@ -15,7 +15,7 @@ public class WorkLogService extends BaseService {
     HttpEntity<WorkLog> request = new HttpEntity<WorkLog>(workLog, headers);
     ResponseEntity<String> response =
         restTemplate.exchange("/business/{businessTag}/worklog", HttpMethod.POST,
-            request, String.class);
+            request, String.class, businessTag);
     return response;
   }
 }
