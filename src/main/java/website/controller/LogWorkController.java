@@ -43,11 +43,10 @@ public class LogWorkController {
     WorkLog workLog = new WorkLog();
     // TODO: Needs to use Authentication solution to get current userName
     workLog.setUserName("Default");
-    workLog.setDescription("Enter a description...");
     model.addAttribute("workLog", workLog);
 
-    model.addAttribute("BOOTSTRAP_DATETIMEPICKER_FORMAT",
-        WebMvcConfig.BOOTSTRAP_DATETIMEPICKER_FORMAT);
+    model.addAttribute("MOMENTJS_DATE_FORMAT",
+        WebMvcConfig.MOMENTJS_DATE_FORMAT);
 
     return "logWork";
   }

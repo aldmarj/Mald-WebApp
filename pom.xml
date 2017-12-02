@@ -23,7 +23,8 @@
     <org.eclipse.jetty>9.4.7.v20170914</org.eclipse.jetty>
     <jquery.version>2.1.4</jquery.version>
     <bootstrap.version>3.3.7-1</bootstrap.version>
-    <bootstrap-datetimepicker.version>2.3.5</bootstrap-datetimepicker.version>
+    <bootstrap-datetimepicker.version>4.17.47</bootstrap-datetimepicker.version>
+    <momentjs.version>2.19.3</momentjs.version>
   </properties>
 
   <dependencies>
@@ -72,8 +73,14 @@
 
     <dependency>
       <groupId>org.webjars</groupId>
-      <artifactId>bootstrap-datetimepicker</artifactId>
+      <artifactId>Eonasdan-bootstrap-datetimepicker</artifactId>
       <version>${bootstrap-datetimepicker.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>momentjs</artifactId>
+      <version>${momentjs.version}</version>
     </dependency>
 
     <dependency>

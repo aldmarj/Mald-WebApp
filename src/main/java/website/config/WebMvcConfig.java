@@ -7,10 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-  public static final String BOOTSTRAP_DATETIMEPICKER_FORMAT = "dd-mm-yyyy HH:ii:ss";
+
+  public static final String MOMENTJS_DATE_FORMAT = "DD-MM-YYYY HH:mm:ss";
 
   @Override
   public void addFormatters(FormatterRegistry registry) {
-    registry.addFormatter(new DateFormatter("dd-MM-yy H:m:s"));
+    registry.addFormatter(new DateFormatter("dd-MM-yy HH:mm:ss"));
   }
+
 }
