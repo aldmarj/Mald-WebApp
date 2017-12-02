@@ -13,7 +13,7 @@ public class ClientService extends BaseService {
 
   public Set<Client> getClients(String businessTag) {
     Client[] response = restTemplate
-        .getForObject("/business/{businessTag}/clientId/",
+        .getForObject("/business/{businessTag}/client/",
             Client[].class,
             businessTag
         );
