@@ -6,7 +6,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+import website.service.auth.AuthenticatedRestTemplate;
 
 /**
  * Should be extended by any service created in the app. <br/>
@@ -19,33 +21,22 @@ public abstract class BaseService
     @Autowired
     private RestTemplate restTemplate;
 
-    private static String appendLoginToken(final String url)
+    private AuthenticatedRestTemplate authenticatedRestTemplate;
+
+    protected RestOperations getRestOperations()
     {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null)
         {
-            return url;
+            return restTemplate;
         }
         else
         {
-            String urlWithToken = url;
-            urlWithToken += url.contains("?") ? "&" : "?";
-            urlWithToken += "t=" + auth.getName();
-            return urlWithToken;
+            if (authenticatedRestTemplate == null)
+            {
+                authenticatedRestTemplate = new AuthenticatedRestTemplate(restTemplate);
+            }
+            return authenticatedRestTemplate;
         }
-
     }
-
-    protected <T> T getForObject(final String uri, final Class<T> responseType)
-    {
-        return restTemplate.getForObject(appendLoginToken(uri), responseType);
-    }
-
-    protected <T> ResponseEntity<T> exchange(final String url, final HttpMethod method,
-                                             final HttpEntity<?> requestEntity, final Class<T> responseType,
-                                             final Object... uriVariables)
-    {
-        return restTemplate.exchange(appendLoginToken(url), method, requestEntity, responseType, uriVariables);
-    }
-
 }

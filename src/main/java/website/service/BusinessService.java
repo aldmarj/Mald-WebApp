@@ -15,10 +15,9 @@ import website.model.Business;
 @Service
 public class BusinessService extends BaseService
 {
-
     public Set<Business> getBusinesses()
     {
-        Business[] response = this
+        Business[] response = this.getRestOperations()
                 .getForObject("/business/",
                         Business[].class
                 );
@@ -31,7 +30,7 @@ public class BusinessService extends BaseService
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Business> request = new HttpEntity<Business>(business, headers);
         ResponseEntity<String> response =
-                this.exchange("/business/", HttpMethod.POST,
+                this.getRestOperations().exchange("/business/", HttpMethod.POST,
                         request, String.class);
         return response;
     }
