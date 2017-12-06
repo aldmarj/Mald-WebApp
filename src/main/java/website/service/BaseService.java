@@ -6,7 +6,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
-import website.service.auth.AuthenticatedRestTemplate;
+import website.service.auth.AuthenticationInterceptor;
+
+import java.util.Collections;
 
 /**
  * Should be extended by any service created in the app. <br/>
@@ -16,25 +18,18 @@ import website.service.auth.AuthenticatedRestTemplate;
 @Service
 public abstract class BaseService
 {
-    @Autowired
+
     private RestTemplate restTemplate;
 
-    private AuthenticatedRestTemplate authenticatedRestTemplate;
+    @Autowired
+    public BaseService(final RestTemplate restTemplate)
+    {
+        this.restTemplate = restTemplate;
+        this.restTemplate.setInterceptors(Collections.singletonList(new AuthenticationInterceptor()));
+    }
 
     protected RestOperations getRestOperations()
     {
-        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null)
-        {
-            return restTemplate;
-        }
-        else
-        {
-            if (authenticatedRestTemplate == null)
-            {
-                authenticatedRestTemplate = new AuthenticatedRestTemplate(restTemplate);
-            }
-            return authenticatedRestTemplate;
-        }
+        return this.restTemplate;
     }
 }
