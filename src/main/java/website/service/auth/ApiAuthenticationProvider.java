@@ -1,5 +1,6 @@
 package website.service.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -11,9 +12,10 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
 {
     private final LoginService loginService;
 
-    public ApiAuthenticationProvider()
+    @Autowired
+    public ApiAuthenticationProvider(final LoginService loginService)
     {
-        this.loginService = new LoginService();
+        this.loginService = loginService;
     }
 
     @Override

@@ -23,10 +23,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
     {
         http.csrf().disable() //TODO reenable after testing
                 .authorizeRequests()
-                    .antMatchers("/","/business").anonymous()
-                    //.anyRequest().authenticated()
+                    .antMatchers("/","/businesses", "/webjars/**").anonymous()
+                    .anyRequest().authenticated()
                     .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/").loginProcessingUrl("/*/login").permitAll()
                 .and().logout().permitAll();
     }
 

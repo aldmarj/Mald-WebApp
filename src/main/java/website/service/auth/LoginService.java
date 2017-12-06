@@ -4,10 +4,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import website.service.BaseService;
 
+@Service
 public class LoginService extends BaseService
 {
     public String login(final String business, final String username, final String password)
@@ -23,7 +25,7 @@ public class LoginService extends BaseService
 
         final ResponseEntity<String> response
                 = this.getRestOperations().postForEntity(
-                        "/" + business + "/login", request, String.class);
+                        "/business/" + business + "/login", request, String.class);
         return response.getBody();
     }
 }
