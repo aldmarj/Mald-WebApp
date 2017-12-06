@@ -31,7 +31,7 @@
         </div>
     </c:if>
     <h2>Work Log</h2>
-    <form:form method="POST" action="/{businessTag}/logWork" modelAttribute="workLog">
+    <form:form method="POST" action="/${businessTag}/logWork" modelAttribute="workLog">
         <div class="form-group">
             <form:label path="startTime">Start Time</form:label>
             <div class="input-group date datetimepicker">
