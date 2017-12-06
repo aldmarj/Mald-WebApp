@@ -1,9 +1,6 @@
 package website.model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * Class representing a worklog.
