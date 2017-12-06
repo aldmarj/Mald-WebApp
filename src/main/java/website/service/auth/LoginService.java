@@ -10,7 +10,7 @@ import website.service.BaseService;
 
 public class LoginService extends BaseService
 {
-    public String login(final String username, final String password)
+    public String login(final String business, final String username, final String password)
     {
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -21,7 +21,9 @@ public class LoginService extends BaseService
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 
-        final ResponseEntity<String> response = this.getRestOperations().postForEntity("/login", request, String.class);
+        final ResponseEntity<String> response
+                = this.getRestOperations().postForEntity(
+                        "/" + business + "/login", request, String.class);
         return response.getBody();
     }
 }
