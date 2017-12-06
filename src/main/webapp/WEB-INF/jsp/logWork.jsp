@@ -41,6 +41,7 @@
                 </span>
             </div>
         </div>
+        <form:errors path="startTime" cssClass="alert alert-danger" element="div"/>
         <div class="form-group">
             <form:label path="endTime">End Time</form:label>
             <div class="input-group date datetimepicker">
@@ -50,10 +51,12 @@
                 </span>
             </div>
         </div>
+        <form:errors path="endTime" cssClass="alert alert-danger" element="div"/>
         <div id="description-group" class="form-group">
             <form:label path="description">Description</form:label>
             <form:textarea path="description" rows="5" placeholder="Enter a description..." class="form-control"/>
         </div>
+        <form:errors path="description" cssClass="alert alert-danger" element="div"/>
         <div id="client-group" class="form-group">
             <form:label path="clientId">Client</form:label>
             <form:select path="clientId" class="form-control">
@@ -62,6 +65,7 @@
                 </c:forEach>
             </form:select>
         </div>
+        <form:errors path="clientId" cssClass="alert alert-danger" element="div"/>
         <button type="submit" class="btn btn-default">Submit</button>
     </form:form>
 </div>
