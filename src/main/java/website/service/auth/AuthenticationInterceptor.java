@@ -21,7 +21,7 @@ public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
 
     private static class AuthenticatedRequest extends HttpRequestWrapper
     {
-        public AuthenticatedRequest(final HttpRequest request)
+        AuthenticatedRequest(final HttpRequest request)
         {
             super(request);
         }
@@ -30,7 +30,7 @@ public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
         public URI getURI()
         {
             final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth == null)
+            if (auth == null || auth.getCredentials().toString().isEmpty())
             {
                 return super.getURI();
             }
@@ -39,9 +39,9 @@ public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
                 final String uriString = super.getURI().toString();
                 final StringBuilder uriWithToken = new StringBuilder(uriString);
                 uriWithToken.append(uriString.contains("?") ? '&' : '?');
-                uriWithToken.append("t"); //todo externalise
+                uriWithToken.append('t'); //todo externalise
                 uriWithToken.append('=');
-                uriWithToken.append(auth.getName()); //todo change to token
+                uriWithToken.append(auth.getCredentials().toString());
                 return URI.create(uriWithToken.toString());
             }
         }

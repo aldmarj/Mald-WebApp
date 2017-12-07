@@ -18,15 +18,8 @@ import java.util.Collections;
 @Service
 public abstract class BaseService
 {
-
-    private RestTemplate restTemplate;
-
     @Autowired
-    public BaseService(final RestTemplate restTemplate)
-    {
-        this.restTemplate = restTemplate;
-        this.restTemplate.setInterceptors(Collections.singletonList(new AuthenticationInterceptor()));
-    }
+    private RestTemplate restTemplate;
 
     protected RestOperations getRestOperations()
     {
