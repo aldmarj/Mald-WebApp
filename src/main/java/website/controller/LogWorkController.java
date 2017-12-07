@@ -77,12 +77,12 @@ public class LogWorkController {
 
     if (response.getStatusCode() == HttpStatus.BAD_REQUEST) {
       // Report the failure to the user.
-      redirectAttributes.addFlashAttribute("error", response.getBody());
-      return "redirect:/" + businessTag + "logWork";
+      model.addAttribute("addWorkLogError", response.getBody());
+      return logWork(businessTag, model);
     }
 
     // Report success to the user.
-    redirectAttributes.addFlashAttribute("success", response.getBody());
+    redirectAttributes.addFlashAttribute("addWorkLogSuccess", response.getBody());
     return "redirect:/" + businessTag;
   }
 }
