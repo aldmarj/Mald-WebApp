@@ -1,11 +1,12 @@
 package website.service.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
-import website.service.BaseService;
 
 @Component
 public class ApiAuthenticationProvider implements AuthenticationProvider
@@ -23,8 +24,11 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
     {
         final String username = authentication.getName();
         final String password = authentication.getCredentials().toString();
-        final String token = loginService.login("cibusinesstag",username, password);
-        return null;
+        final String business = authentication.getDetails().toString();
+        final String token = loginService.login(business,username, password);
+        final AbstractAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(username, token, null);
+        newAuth.setDetails(business);
+        return newAuth;
     }
 
     @Override
