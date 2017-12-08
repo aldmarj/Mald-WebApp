@@ -25,7 +25,7 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
         final String username = authentication.getName();
         final String password = authentication.getCredentials().toString();
         final String business = authentication.getDetails().toString();
-        final String token = loginService.login(business,username, password);
+        final String token = loginService.login(business, username, password);
         if (token.isEmpty())
         {
             return null;
