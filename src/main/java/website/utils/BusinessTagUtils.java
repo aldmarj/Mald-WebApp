@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public final class BusinessTagUtils
 {
-    private static final Pattern BUSINESS_TAG_PATTERN = Pattern.compile("^\\/([^\\/]*)\\/.*");
+    private static final Pattern BUSINESS_TAG_PATTERN = Pattern.compile("^\\/([^\\/]*)\\/?.*");
 
     private BusinessTagUtils()
     {

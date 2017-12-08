@@ -14,7 +14,7 @@
 <head>
     <title>login</title>
     <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
-	<script src='webjars/jquery/jquery.min.js'></script>
+	<script src='/webjars/jquery/jquery.min.js'></script>
 </head>
 <body>
 	<div class="container">

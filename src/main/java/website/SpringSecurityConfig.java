@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import website.service.auth.BusinessAuthFailureHandler;
 import website.service.auth.BusinessAuthenticationDetailsSource;
+import website.service.auth.BusinessLoginUrlAuthenticationEntryPoint;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,13 +30,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable() //TODO reenable after testing
                 .authorizeRequests()
                     .antMatchers("/","/businesses", "/webjars/**", "/*/login").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest()
+                    .authenticated()
                     .and()
                 .formLogin()
                     .authenticationDetailsSource(detailsSource)
-                    .defaultSuccessUrl("/businesses",true)
-                    .loginPage("/").failureHandler(new BusinessAuthFailureHandler()).loginProcessingUrl("/*/login").permitAll()
-                .and().logout().permitAll();
+                    .defaultSuccessUrl("/businesses",false)
+                    .loginPage("/")
+                    .failureHandler(new BusinessAuthFailureHandler())
+                    .loginProcessingUrl("/*/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .permitAll()
+                    .and()
+                .exceptionHandling()
+                    .authenticationEntryPoint(new BusinessLoginUrlAuthenticationEntryPoint("/login"));
     }
 
     @Override
