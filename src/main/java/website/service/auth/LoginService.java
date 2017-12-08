@@ -1,9 +1,6 @@
 package website.service.auth;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -26,6 +23,14 @@ public class LoginService extends BaseService
         final ResponseEntity<String> response
                 = this.getRestOperations().postForEntity(
                         "/business/" + business + "/login", request, String.class);
-        return response.getBody();
+
+        if (HttpStatus.OK.equals(response.getStatusCode()))
+        {
+            return response.getBody();
+        }
+        else
+        {
+            return null;
+        }
     }
 }

@@ -3,6 +3,7 @@ package website.service.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,9 +27,9 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
         final String password = authentication.getCredentials().toString();
         final String business = authentication.getDetails().toString();
         final String token = loginService.login(business, username, password);
-        if (token.isEmpty())
+        if (token == null || token.isEmpty())
         {
-            return null;
+            throw new BadCredentialsException("username or password are incorrect");
         }
         else
         {
@@ -41,6 +42,6 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
     @Override
     public boolean supports(final Class<?> authentication)
     {
-        return true;
+        return UsernamePasswordAuthenticationToken.class.equals(authentication);
     }
 }

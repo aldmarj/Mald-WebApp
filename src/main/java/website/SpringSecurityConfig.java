@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import website.service.auth.BusinessAuthFailureHandler;
 import website.service.auth.BusinessAuthenticationDetailsSource;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                     .and()
                 .formLogin()
                     .authenticationDetailsSource(detailsSource)
-            		.defaultSuccessUrl("/businesses",true)
-                    .loginPage("/").loginProcessingUrl("/*/login").permitAll()
+                    .defaultSuccessUrl("/businesses",true)
+                    .loginPage("/").failureHandler(new BusinessAuthFailureHandler()).loginProcessingUrl("/*/login").permitAll()
                 .and().logout().permitAll();
     }
 
