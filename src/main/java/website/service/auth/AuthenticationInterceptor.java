@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Objects;
 
 public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
 {
@@ -30,7 +31,7 @@ public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
         public URI getURI()
         {
             final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth == null || auth.getCredentials().toString().isEmpty())
+            if (auth == null || auth.getCredentials() == null || auth.getCredentials().toString().isEmpty())
             {
                 return super.getURI();
             }
