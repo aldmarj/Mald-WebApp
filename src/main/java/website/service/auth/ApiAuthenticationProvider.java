@@ -7,7 +7,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
 
 @Component
 public class ApiAuthenticationProvider implements AuthenticationProvider
@@ -33,7 +36,11 @@ public class ApiAuthenticationProvider implements AuthenticationProvider
         }
         else
         {
-            final AbstractAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(username, token, null);
+            final AbstractAuthenticationToken newAuth =
+                    new UsernamePasswordAuthenticationToken(
+                            username,
+                            token,
+                            Collections.singleton(new SimpleGrantedAuthority("ROLE_" + business)));
             newAuth.setDetails(business);
             return newAuth;
         }
