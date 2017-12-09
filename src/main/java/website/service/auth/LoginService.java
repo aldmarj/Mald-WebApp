@@ -21,7 +21,7 @@ public class LoginService extends BaseService
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 
         final ResponseEntity<String> response
-                = this.getRestOperations().postForEntity(
+                = restTemplate.postForEntity(
                         "/business/" + business + "/login", request, String.class);
 
         if (HttpStatus.OK.equals(response.getStatusCode()))

@@ -16,7 +16,7 @@ public class BusinessService extends BaseService
 {
     public Set<Business> getBusinesses()
     {
-        Business[] response = this.getRestOperations()
+        Business[] response = restTemplate
                 .getForObject("/business/",
                         Business[].class
                 );
@@ -29,7 +29,7 @@ public class BusinessService extends BaseService
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Business> request = new HttpEntity<Business>(business, headers);
         ResponseEntity<String> response =
-                this.getRestOperations().exchange("/business/", HttpMethod.POST,
+                restTemplate.exchange("/business/", HttpMethod.POST,
                         request, String.class);
         return response;
     }

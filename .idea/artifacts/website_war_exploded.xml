@@ -49,6 +49,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.12.RELEASE" />
           <element id="library" level="project" name="Maven: org.webjars:jquery:2.1.4" />
           <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.7-1" />
+          <element id="library" level="project" name="Maven: org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47" />
+          <element id="library" level="project" name="Maven: org.webjars:momentjs:2.19.3" />
           <element id="library" level="project" name="Maven: org.webjars:webjars-locator:0.32-1" />
           <element id="library" level="project" name="Maven: org.webjars:webjars-locator-core:0.32" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
