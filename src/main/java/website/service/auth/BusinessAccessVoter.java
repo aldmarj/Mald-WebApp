@@ -35,9 +35,9 @@ public class BusinessAccessVoter implements AccessDecisionVoter<FilterInvocation
     public int vote(final Authentication authentication, final FilterInvocation object, final Collection<ConfigAttribute> attributes)
     {
         final String businessTag = BusinessTagUtils.getBusinessTag(object.getRequestUrl());
-        if (authentication instanceof UsernamePasswordAuthenticationToken && !exemptBusinesses.contains(businessTag))
+        if (authentication instanceof UsernamePasswordAuthenticationToken)
         {
-            if (businessTag.equals(authentication.getDetails()))
+            if (businessTag.equals(authentication.getDetails()) || exemptBusinesses.contains(businessTag))
             {
                 return ACCESS_GRANTED;
             }

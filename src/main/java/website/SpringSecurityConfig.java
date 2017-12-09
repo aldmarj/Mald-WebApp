@@ -7,7 +7,6 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
-import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,10 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 import website.service.auth.BusinessAccessVoter;
 import website.service.auth.BusinessAuthFailureHandler;
-import website.service.auth.BusinessAuthenticationDetailsSource;
 import website.service.auth.BusinessLoginUrlAuthenticationEntryPoint;
+import website.utils.BusinessTagUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,8 +29,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private AuthenticationProvider authProvider;
 
-    private AuthenticationDetailsSource<HttpServletRequest, ?> detailsSource = new BusinessAuthenticationDetailsSource();
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception
     {
@@ -43,9 +39,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                     .accessDecisionManager(this.createAccessDecisionManager())
                     .and()
                 .formLogin()
-                    .authenticationDetailsSource(detailsSource)
+                    .authenticationDetailsSource(r -> BusinessTagUtils.getBusinessTag(r.getRequestURI()))
                     .defaultSuccessUrl("/businesses",false)
-                    .loginPage("/")
                     .failureHandler(new BusinessAuthFailureHandler())
                     .loginProcessingUrl("/*/login")
                     .permitAll()
