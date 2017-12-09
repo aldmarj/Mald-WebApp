@@ -1,12 +1,14 @@
 package website;
 
+import java.util.Locale;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.client.RestTemplate;
-
 import website.handlers.EMSResponseErrorHandler;
 import website.service.auth.AuthenticationInterceptor;
 
@@ -38,5 +40,13 @@ public class SpringBootWebApplication
                 .additionalInterceptors(new AuthenticationInterceptor())
                 .build();
     }
+
+  @Bean
+  public MessageSource messageSource() {
+    Locale.setDefault(Locale.ENGLISH);
+    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    messageSource.addBasenames("classpath:messages");
+    return messageSource;
+  }
 
 }
