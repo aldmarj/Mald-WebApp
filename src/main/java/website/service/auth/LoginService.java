@@ -6,6 +6,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import website.service.BaseService;
 
+/**
+ * Service for sending request to the API's login page.
+ *
+ * @author Matt
+ */
 @Service
 public class LoginService extends BaseService
 {

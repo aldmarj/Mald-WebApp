@@ -7,11 +7,13 @@ import website.utils.BusinessTagUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * LoginUrlAuthenticationEntryPoint that redirects to the relevant login page for the requested business
+ *
+ * @author Matt
+ */
 public class BusinessLoginUrlAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint
 {
-    /**
-     * @param loginFormUrl
-     */
     public BusinessLoginUrlAuthenticationEntryPoint(final String loginFormUrl)
     {
         super(loginFormUrl);

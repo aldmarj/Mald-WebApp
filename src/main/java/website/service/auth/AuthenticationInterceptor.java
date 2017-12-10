@@ -12,10 +12,16 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Objects;
 
+/**
+ * ClientRequestInterceptor that adds the current users token to the request before it is sent to the API server.
+ *
+ * @author Matt
+ */
 public class AuthenticationInterceptor implements ClientHttpRequestInterceptor
 {
     @Override
-    public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException
+    public ClientHttpResponse intercept(final HttpRequest request, final byte[] body,
+                                        final ClientHttpRequestExecution execution) throws IOException
     {
         return execution.execute(new AuthenticatedRequest(request), body);
     }

@@ -10,6 +10,11 @@ import website.utils.BusinessTagUtils;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * AccessVoter that denies access to resources that are part of a different business than the current user.
+ *
+ * @author Matt
+ */
 public class BusinessAccessVoter implements AccessDecisionVoter<FilterInvocation>
 {
     private final Collection<String> exemptBusinesses;
@@ -32,9 +37,10 @@ public class BusinessAccessVoter implements AccessDecisionVoter<FilterInvocation
     }
 
     @Override
-    public int vote(final Authentication authentication, final FilterInvocation object, final Collection<ConfigAttribute> attributes)
+    public int vote(final Authentication authentication, final FilterInvocation filter,
+                    final Collection<ConfigAttribute> attributes)
     {
-        final String businessTag = BusinessTagUtils.getBusinessTag(object.getRequestUrl());
+        final String businessTag = BusinessTagUtils.getBusinessTag(filter.getRequestUrl());
         if (authentication instanceof UsernamePasswordAuthenticationToken)
         {
             if (businessTag.equals(authentication.getDetails()) || exemptBusinesses.contains(businessTag))

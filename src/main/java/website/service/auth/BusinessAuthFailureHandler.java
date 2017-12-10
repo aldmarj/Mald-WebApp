@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * AuthenticationFailureHandler that redirects requests back to the relevant login page for the current business.
+ *
+ * @author Matt
+ */
 public class BusinessAuthFailureHandler implements AuthenticationFailureHandler
 {
     @Override

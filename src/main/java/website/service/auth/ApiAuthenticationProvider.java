@@ -12,6 +12,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
+/**
+ * Authentication Provider that takes a {@link UsernamePasswordAuthenticationToken}
+ * and authenticates it by sending the details to the API server.
+ *
+ * @author Matt
+ */
 @Component
 public class ApiAuthenticationProvider implements AuthenticationProvider
 {

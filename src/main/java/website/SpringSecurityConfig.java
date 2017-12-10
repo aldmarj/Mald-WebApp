@@ -60,11 +60,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 
     private AccessDecisionManager createAccessDecisionManager()
     {
-        final List<AccessDecisionVoter<?>> decisionVoters = Arrays.asList(
+        return new UnanimousBased(Arrays.asList(
                 new WebExpressionVoter(),
                 new RoleVoter(),
                 new AuthenticatedVoter(),
-                new BusinessAccessVoter("","businesses", "webjars"));
-        return new UnanimousBased(decisionVoters);
+                new BusinessAccessVoter("","businesses", "webjars")));
     }
 }
