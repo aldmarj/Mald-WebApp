@@ -3,7 +3,6 @@ package website;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
@@ -19,12 +18,29 @@ import website.service.auth.BusinessLoginUrlAuthenticationEntryPoint;
 import website.utils.BusinessTagUtils;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 {
+    private static final String[] PERMITTED_URLS = new String[]
+    {
+        "/",
+        "/businesses",
+        "/webjars/**",
+        "/*/login",
+        "/error",
+        "/health"
+    };
+
+    private static final String[] SHARED_BUSINESSES = new String[]
+    {
+        "",
+        "businesses",
+        "webjars",
+        "error",
+        "health"
+    };
 
     @Autowired
     private AuthenticationProvider authProvider;
@@ -34,7 +50,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
     {
         http.csrf().disable() //TODO reenable after testing
                 .authorizeRequests()
-                    .antMatchers("/","/businesses", "/webjars/**", "/*/login").permitAll()
+                    .antMatchers(PERMITTED_URLS).permitAll()
                     .anyRequest().authenticated()
                     .accessDecisionManager(this.createAccessDecisionManager())
                     .and()
@@ -64,6 +80,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                 new WebExpressionVoter(),
                 new RoleVoter(),
                 new AuthenticatedVoter(),
-                new BusinessAccessVoter("","businesses", "webjars")));
+                new BusinessAccessVoter(SHARED_BUSINESSES)));
     }
 }
