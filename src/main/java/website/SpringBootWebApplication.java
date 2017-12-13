@@ -10,28 +10,36 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.client.RestTemplate;
 import website.handlers.EMSResponseErrorHandler;
+import website.service.auth.AuthenticationInterceptor;
 
 @SpringBootApplication
-public class SpringBootWebApplication {
+public class SpringBootWebApplication
+{
 
-  /**
-   * Value provided from application-{environment}.properties file
-   */
-  @Value("${api.rootUri}")
-  private String apiRootUri;
+    /**
+     * Value provided from application-{environment}.properties file
+     */
+    @Value("${api.rootUri}")
+    private String apiRootUri;
 
-  public static void main(String[] args) {
-    SpringApplication.run(SpringBootWebApplication.class, args);
-  }
+    public static void main(String[] args)
+    {
+        SpringApplication.run(SpringBootWebApplication.class, args);
+    }
 
-  /**
-   * Bean definition that returns a preconfigured RestTemplate.
-   * Useful for @Autowire declarations, see {@link website.service.BaseService}
-   */
-  @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
-	  return builder.rootUri(apiRootUri).errorHandler(new EMSResponseErrorHandler()).build();
-  }
+    /**
+     * Bean definition that returns a preconfigured RestTemplate.
+     * Useful for @Autowire declarations, see {@link website.service.BaseService}
+     */
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder)
+    {
+        return builder
+                .rootUri(apiRootUri)
+                .errorHandler(new EMSResponseErrorHandler())
+                .additionalInterceptors(new AuthenticationInterceptor())
+                .build();
+    }
 
   @Bean
   public MessageSource messageSource() {

@@ -9,8 +9,8 @@ import org.springframework.web.client.RestTemplate;
  * See {@link ClientService} for example subclass implementation <br/>
  * See {@link website.SpringBootWebApplication} for the RestTemplate config
  */
-public abstract class BaseService {
-
+public abstract class BaseService
+{
   @Autowired
   protected RestTemplate restTemplate;
 
