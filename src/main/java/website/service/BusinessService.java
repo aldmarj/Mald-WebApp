@@ -8,22 +8,37 @@ import org.springframework.stereotype.Service;
 import website.model.Business;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
+/**
+ * Business service to support communications with the API.
+ * 
+ * @author Lawrence
+ */
 @Service
 public class BusinessService extends BaseService
 {
-    public Set<Business> getBusinesses()
+	/**
+	 * Get all of the buisnesses stored in the EMS.
+	 * 
+	 * @return the list fo businesses.
+	 */
+    public Collection<Business> getBusinesses()
     {
         Business[] response = restTemplate
                 .getForObject("/business/",
                         Business[].class
                 );
 
-        return new HashSet<>(Arrays.asList(response));
+        return Arrays.asList(response);
     }
 
+    /**
+     * Add a business to the API.
+     * 
+     * @param business - the business to add.
+     * @return success string or error string if invalid.
+     */
     public ResponseEntity<String> addBusiness(Business business)
     {
         HttpHeaders headers = new HttpHeaders();

@@ -2,15 +2,26 @@ package website.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Model for representing an account.
+ * 
+ * @author Lawrence
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class Account
 {
+	/** The username of the account, unique to a businessTag **/
     private String userName;
     
+    /** The id of the business the account belongs to **/
     private String businessTag;
 
+    /** An email address for the account **/
     private String email;
 
+    /**
+     * CLASS CONSTRUCTOR
+     */
     public Account()
     {
         this.userName = null;
@@ -18,6 +29,13 @@ public final class Account
         this.email = null;
     }
 
+    /**
+     * CLASS CONSTRUCTOR
+     * 
+     * @param username
+     * @param businessTag
+     * @param email
+     */
     public Account(final String username,
                    final String businessTag, final String email)
     {

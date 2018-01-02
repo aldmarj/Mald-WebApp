@@ -1,6 +1,6 @@
 package website.controller;
 
-import java.util.Set;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,24 +16,38 @@ import website.model.Account;
 import website.model.Business;
 import website.model.Employee;
 import website.service.BusinessService;
-import website.service.EmployeeService;
 
+/**
+ * Controller to handle URL mapping and model mutations regarding the home page.
+ * 
+ * @author Lawrence
+ */
 @Controller
 public class HomeController {
 
+	/** Business service for talking to the API **/
 	private final BusinessService businessService;
-	private final EmployeeService employeeService;
 
+	/**
+	 * CLASS CONSTRUCTOR
+	 * 
+	 * @param businessService - Instance is autowired and popualted by spring.
+	 */
 	@Autowired
-	public HomeController(BusinessService businessService, EmployeeService employeeService) {
+	public HomeController(BusinessService businessService) {
 		this.businessService = businessService;
-		this.employeeService = employeeService;
 	}
 
+	/**
+	 * GET request handle for the root URL.
+	 * 
+	 * @param model - The model.
+	 * @return name of the jsp to show.
+	 */
 	@GetMapping("/")
 	public String home(Model model) {
 		// Get all businesses to display as a list
-		Set<?> businesses = businessService.getBusinesses();
+		Collection<?> businesses = businessService.getBusinesses();
 	    model.addAttribute("businesses", businesses);
 	    
 	    // Set default values for displaying in the fields
@@ -43,12 +57,19 @@ public class HomeController {
 		return "home";	
 	}
 	
+	/**
+	 * POST request handle for the root URL.
+	 * 
+	 * @param business - the business that is being posted.
+	 * @param model - the view's model.
+	 * @param redirectAttributes - temporary attributes for showing errors.
+	 * @return the name of the jsp to show.
+	 */
 	@PostMapping("/")
     public String addBusiness(@ModelAttribute("business")Business business,
     		Model model, RedirectAttributes redirectAttributes) 
 	{		
-		Employee employee = business.getDefaultEmployee();
-		setupEmployeeWithBusinessDetails(business, employee);
+		business.getInitialEmployee().setBusinessTag(business.getBusinessTag());
 		
 		// Attempt to add the business
         ResponseEntity<String> businessResponse = businessService.addBusiness(business);
@@ -58,22 +79,17 @@ public class HomeController {
         	redirectAttributes.addFlashAttribute("error", businessResponse.getBody());
         	return "redirect:/";
         }
-        
-        // Attempt to add the employee
-        ResponseEntity<String> employeeResponce = 
-        		employeeService.addEmployee(employee, business.getBusinessTag());
-        if(businessResponse.getStatusCode() == HttpStatus.BAD_REQUEST)
-        {
-        	// Report the failure to the user.
-        	redirectAttributes.addFlashAttribute("error", employeeResponce.getBody());
-        	return "redirect:/";
-        }
     	
         // Report success to the user.
     	redirectAttributes.addFlashAttribute("success", businessResponse.getBody());
 		return "redirect:/" + business.getBusinessTag();
     }
 	
+	/**
+	 * Return a business populated with defaults for display.
+	 * 
+	 * @return a business populated with defaults.
+	 */
 	private Business createDefaultBusiness()
 	{
 	    // Get the possible new business
@@ -82,12 +98,17 @@ public class HomeController {
 		// set default value of the fields
 		business.setBusinessName("Name");
 		business.setBusinessTag("Tag");
-		business.setDefaultEmployee(createDefaultEmployee());
+		business.setInitialEmployee(createInitialEmployee());
 		
 		return business;
 	}
 	
-	private Employee createDefaultEmployee()
+	/**
+	 * Return an employee populated with defaults for display.
+	 * 
+	 * @return an employee populated with defaults.
+	 */
+	private Employee createInitialEmployee()
 	{
 	    // Get the possible new business
 		Employee employee = new Employee();
@@ -102,11 +123,5 @@ public class HomeController {
 		employee.setJobRole("Job Role");
 		
 		return employee;
-	}
-	
-	private void setupEmployeeWithBusinessDetails(Business business, Employee employee)
-	{
-		employee.setBusinessTag(business.getBusinessTag());
-		employee.getAccount().setBusinessTag(business.getBusinessTag());
 	}
 }

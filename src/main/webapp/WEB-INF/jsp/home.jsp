@@ -7,7 +7,7 @@
 <head>
 	<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
 	<script src='webjars/jquery/jquery.min.js'></script>
-    <style rel="stylesheet">
+    <style>
         .left {
             float: left;
             width: 45%;
@@ -69,24 +69,24 @@
   				<div class="right">
   					<p>Initial User Details</p>
   					 <div class="form-group">
-							<form:label path="defaultEmployee.account.userName">User Name</form:label>
-		                    <form:input path="defaultEmployee.account.userName" class="form-control"/>
+							<form:label path="initialEmployee.account.userName">User Name</form:label>
+		                    <form:input path="initialEmployee.account.userName" class="form-control"/>
 					 </div>
 					 <div class="form-group">
-		                    <form:label path="defaultEmployee.firstName">First Name</form:label>
-		                    <form:input path="defaultEmployee.firstName" class="form-control"/>
+		                    <form:label path="initialEmployee.firstName">First Name</form:label>
+		                    <form:input path="initialEmployee.firstName" class="form-control"/>
 					 </div>
 					 <div class="form-group">
-		                    <form:label path="defaultEmployee.surName">Sur Name</form:label>
-		                    <form:input path="defaultEmployee.surName" class="form-control"/>
+		                    <form:label path="initialEmployee.surName">Sur Name</form:label>
+		                    <form:input path="initialEmployee.surName" class="form-control"/>
 					 </div>
 					 <div class="form-group">
-		                    <form:label path="defaultEmployee.jobRole">Job Role</form:label>
-		                    <form:input path="defaultEmployee.jobRole" class="form-control"/>
+		                    <form:label path="initialEmployee.jobRole">Job Role</form:label>
+		                    <form:input path="initialEmployee.jobRole" class="form-control"/>
 					 </div>
 					 <div class="form-group">
-		                    <form:label path="defaultEmployee.requestedPassword">Password</form:label>
-		                    <form:password path="defaultEmployee.requestedPassword" class="form-control"/>
+		                    <form:label path="initialEmployee.requestedPassword">Password</form:label>
+		                    <form:password path="initialEmployee.requestedPassword" class="form-control"/>
 					 </div>
   				</div>
        		</section>
