@@ -5,9 +5,17 @@
 	
 <html>
 <head>
-<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
-<script src='webjars/jquery/jquery.min.js'></script>
-
+	<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+	<script src='webjars/jquery/jquery.min.js'></script>
+    <style rel="stylesheet">
+        .left {
+            float: left;
+            width: 45%;
+        }
+        .right {
+             margin-left: 50%;
+        }
+    </style>
 </head>
 <body>
 	<div class="container">
@@ -45,17 +53,45 @@
 		</table>
 		
 		<p>Join us today!</p>
-        <form:form method="POST" action="/businesses" modelAttribute="business">
-             <div class="form-group">
-					<form:label path="businessName">Name</form:label>
-                    <form:input path="businessName" class="form-control"/>
-			 </div>
-			 <div class="form-group">
-                    <form:label path="businessTag">Tag</form:label>
-                    <form:input path="businessTag" class="form-control"/>
-			 </div>
-  			 <button type="submit" class="btn btn-default">Submit</button>
-        </form:form>
+        <form:form method="POST" action="/" modelAttribute="business">
+        	<section>
+				<div class="left">
+				     <p>New Business Details </p>
+		             <div class="form-group">
+							<form:label path="businessName">Name</form:label>
+		                    <form:input path="businessName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="businessTag">Tag</form:label>
+		                    <form:input path="businessTag" class="form-control"/>
+					 </div>
+  			 	</div>
+  				<div class="right">
+  					<p>Initial User Details</p>
+  					 <div class="form-group">
+							<form:label path="defaultEmployee.account.userName">User Name</form:label>
+		                    <form:input path="defaultEmployee.account.userName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="defaultEmployee.firstName">First Name</form:label>
+		                    <form:input path="defaultEmployee.firstName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="defaultEmployee.surName">Sur Name</form:label>
+		                    <form:input path="defaultEmployee.surName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="defaultEmployee.jobRole">Job Role</form:label>
+		                    <form:input path="defaultEmployee.jobRole" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="defaultEmployee.requestedPassword">Password</form:label>
+		                    <form:password path="defaultEmployee.requestedPassword" class="form-control"/>
+					 </div>
+  				</div>
+       		</section>
+       		<button type="submit" class="btn btn-default">Submit</button>
+        </form:form>  
 	</div>
 </body>
 </html>
