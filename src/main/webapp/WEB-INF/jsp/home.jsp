@@ -15,6 +15,9 @@
         .right {
              margin-left: 50%;
         }
+        .submitButton {
+		float: right;
+		}
     </style>
 </head>
 <body>
@@ -27,30 +30,6 @@
 	    </c:if>       
 	
 		<h2>Employee Management System</h2>
-		<p>Welcome to the Employee Management System! We currently support:</p>
-
-		<table id="business-table" class="table table-striped">
-			<thead>
-				<tr>
-					<th>Business Name</th>
-					<th>Business Tag</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${businesses}" var="business">   
-					<tr>
-						<td>
-						   	<c:out value="${business.businessName}" />
-						</td>
-						<td>
-							<a href="${pageContext.request.contextPath}/${business.businessTag}">
-								<c:out value="${business.businessTag}" />
-							</a>	
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
 		
 		<p>Join us today!</p>
         <form:form method="POST" action="/" modelAttribute="business">
@@ -90,8 +69,33 @@
 					 </div>
   				</div>
        		</section>
-       		<button type="submit" class="btn btn-default">Submit</button>
+       		<button type="submit" class="btn btn-default submitButton">Submit</button>
         </form:form>  
+	
+		<p>Welcome to the Employee Management System! We currently support:</p>
+
+		<table id="business-table" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Business Name</th>
+					<th>Business Tag</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${businesses}" var="business">   
+					<tr>
+						<td>
+						   	<c:out value="${business.businessName}" />
+						</td>
+						<td>
+							<a href="${pageContext.request.contextPath}/${business.businessTag}">
+								<c:out value="${business.businessTag}" />
+							</a>	
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

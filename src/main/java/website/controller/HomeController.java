@@ -90,7 +90,7 @@ public class HomeController {
 	 * 
 	 * @return a business populated with defaults.
 	 */
-	private Business createDefaultBusiness()
+	public static Business createDefaultBusiness()
 	{
 	    // Get the possible new business
 		Business business = new Business();
@@ -108,7 +108,7 @@ public class HomeController {
 	 * 
 	 * @return an employee populated with defaults.
 	 */
-	private Employee createInitialEmployee()
+	public static Employee createInitialEmployee()
 	{
 	    // Get the possible new business
 		Employee employee = new Employee();
@@ -121,6 +121,7 @@ public class HomeController {
 		employee.setFirstName("First Name");
 		employee.setSurName("Sur Name");
 		employee.setJobRole("Job Role");
+		employee.setParentUserName("");
 		
 		return employee;
 	}

@@ -28,20 +28,22 @@ public class EmployeeService extends BaseService
 	 * 
 	 * @return a list of all the employees for a business.
 	 */
-    public Set<Employee> getEmployees()
+    public Set<Employee> getEmployees(String businessTag)
     {
     	Employee[] response = restTemplate
                 .getForObject("/business/{businessTag}/employee",
-                		Employee[].class
+                		Employee[].class,
+                		businessTag
                 );
 
         return new HashSet<>(Arrays.asList(response));
     }
 	
-	public Set<Employee> getTopEmployees() {
+	public Set<Employee> getTopEmployees(String businessTag) {
         Employee[] response = restTemplate
                 .getForObject("/business/{businessTag}/employee/mostWorked/top/1/10/between/10/20",
-                        Employee[].class
+                        Employee[].class,
+                        businessTag
                 );
 
         return new HashSet<>(Arrays.asList(response));
@@ -59,7 +61,7 @@ public class EmployeeService extends BaseService
         HttpEntity<Employee> request = new HttpEntity<Employee>(employee, headers);
         ResponseEntity<String> response =
                 restTemplate.exchange("/business/{businessTag}/employee", HttpMethod.POST,
-                        request, String.class);
+                        request, String.class, employee.getBusinessTag());
         return response;
     }
 }

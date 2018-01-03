@@ -43,8 +43,6 @@ public class Employee
 	public Employee()
     {
 		this(new Account(), "", "", null, "", -1);
-        this.surName = "";
-        this.businessTag = "";
     }
 	
 	/**
