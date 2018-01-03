@@ -5,6 +5,7 @@
 
 <html>
 <head>
+    <title>EMS - Add Work Entry</title>
     <link rel='stylesheet' href='${pageContext.request.contextPath}/webjars/bootstrap/css/bootstrap.min.css'>
     <link rel='stylesheet' href='${pageContext.request.contextPath}/webjars/Eonasdan-bootstrap-datetimepicker/css/bootstrap-datetimepicker.css'>
     <script src='${pageContext.request.contextPath}/webjars/jquery/jquery.js'></script>
@@ -23,6 +24,10 @@
     </style>
 </head>
 <body>
+<ol class="breadcrumb">
+    <li><a href="/${businessTag}">Dashboard</a></li>
+    <li class="active">Add Work Entry</li>
+</ol>
 <div class="container">
     <br>
     <c:if test="${not empty error}">
