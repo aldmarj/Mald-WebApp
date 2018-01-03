@@ -13,6 +13,8 @@ import website.service.EmployeeService;
 import website.service.WorkLogService;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -33,14 +35,14 @@ public class DashboardController {
     public String dashboard(@PathVariable final String businessTag, Model model) {
         model.addAttribute("businessTag", businessTag);
 
-        Set<?> clients = clientService.getClients(businessTag);
+        List clients = clientService.getClients(businessTag);
         model.addAttribute("clients", clients);
 
 
         Set<?> worklog = worklogService.getWorklogs(businessTag);
         model.addAttribute("worklog", worklog);
 
-        Set<?> topEmployee = employeeService.getTopEmployees(businessTag);
+        ArrayList topEmployee = employeeService.getTopEmployees(businessTag);
         model.addAttribute("topEmployee", topEmployee);
 
 

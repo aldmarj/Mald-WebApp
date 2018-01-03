@@ -1,5 +1,6 @@
 package website.controller;
 
+import java.util.ArrayList;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -47,7 +48,7 @@ public class LogWorkController {
     model.addAttribute("businessTag", businessTag);
 
     // use API to get all clients for this business
-    Set<?> clients = clientService.getClients(businessTag);
+    ArrayList clients = clientService.getClients(businessTag);
     model.addAttribute("clients", clients);
 
     // if method has been called with an existing workLog use it

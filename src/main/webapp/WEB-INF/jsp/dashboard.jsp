@@ -9,15 +9,63 @@
     <title>Dashboard</title>
     <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
     <script src='webjars/jquery/jquery.min.js'></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB94W0BDX-9ozCc44w9fzwKavWncNBcokw">
+    </script>
     <style>
         #map {
             height: 400px;
             width: 100%;
         }
 
+        .mypanel {
+            height: 350px;
+            overflow-y: auto;
+        }
+
     </style>
+
+    <script>
+        var geocoder;
+        var map;
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var mapOptions = {
+                zoom: 8,
+                center: latlng
+            }
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            codeAddress();
+        }
+
+        function codeAddress() {
+            <c:forEach items="${clients}" var="clients">
+            <c:set var="size" scope="session" value="${clients.getLocations().size()}"/>
+            <c:if test="${size != 0}">
+            var address = '<c:out value="${clients.getLocations().get(0).getPostCode()}"/>';
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status == 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+
+            </c:if>
+            </c:forEach>
+        }
+    </script>
+
+
 </head>
-<body>
+<body onload="initialize()">
 <!-- Nav Bar -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -46,20 +94,6 @@
 
 
 <div class="container" style="margin-top: 80px">
-    <!-- Weather Widget
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Weather</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="openweathermap-widget-11"></div>
-                </div>
-            </div>
-        </div>
-    </div>-->
 
     <div class="row">
         <div class="col-md-6">
@@ -67,7 +101,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Top Employee</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body mypanel">
                     <table id="topEmployee-table" class="table table-striped">
                         <thead>
                         <tr>
@@ -100,7 +134,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Work Log</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body mypanel">
                     <table id="worklog-table" class="table table-striped">
                         <thead>
                         <tr>
@@ -135,6 +169,52 @@
     </div>
 
     <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Clients</h3>
+                </div>
+                <div class="panel-body">
+                    <table id="client-table" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Client ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Postcode</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${clients}" var="clients">
+                            <tr>
+                                <td>
+                                    <c:out value="${clients.getClientId()}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${clients.getClientName()}"/>
+                                </td>
+                                <td>
+                                    <c:set var="size" scope="session" value="${clients.getLocations().size()}"/>
+                                    <c:if test="${size != 0}">
+                                        <c:out value="${clients.getLocations().get(0).getDescription()}"/>
+                                    </c:if>
+                                </td>
+                                <td>
+                                    <c:set var="size" scope="session" value="${clients.getLocations().size()}"/>
+                                    <c:if test="${size != 0}">
+                                        <c:out value="${clients.getLocations().get(0).getPostCode()}"/>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -147,27 +227,6 @@
         </div>
     </div>
 </div>
-
-
-<script>
-
-
-    function initMap() {
-        var plymouth = {lat: 50.3755, lng: -4.1427 };
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: plymouth
-        });
-        var marker = new google.maps.Marker({
-            position: plymouth,
-            map: map
-        });
-    }
-
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB94W0BDX-9ozCc44w9fzwKavWncNBcokw&callback=initMap">
-</script>
 
 
 </body>
