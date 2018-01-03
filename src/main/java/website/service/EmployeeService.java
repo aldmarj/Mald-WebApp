@@ -37,6 +37,15 @@ public class EmployeeService extends BaseService
 
         return new HashSet<>(Arrays.asList(response));
     }
+	
+	public Set<Employee> getTopEmployees() {
+        Employee[] response = restTemplate
+                .getForObject("/business/{businessTag}/employee/mostWorked/top/1/10/between/10/20",
+                        Employee[].class
+                );
+
+        return new HashSet<>(Arrays.asList(response));
+    }
     
     /**
      * Add an employee to the business context.

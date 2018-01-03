@@ -1,5 +1,6 @@
 package website.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -42,6 +43,8 @@ public class Employee
 	public Employee()
     {
 		this(new Account(), "", "", null, "", -1);
+        this.surName = "";
+        this.businessTag = "";
     }
 	
 	/**
