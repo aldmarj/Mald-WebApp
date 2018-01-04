@@ -38,7 +38,8 @@ public class DashboardController {
         Collection<WorkLog> worklog = worklogService.getWorklogs(businessTag);
         model.addAttribute("worklog", worklog);
 
-        Collection<Employee> topEmployee = employeeService.getTopEmployees(businessTag);
+        Collection<Employee> topEmployee = 
+        		employeeService.getTopNEmployeesForCurrentMonth(businessTag, 10);
         model.addAttribute("topEmployee", topEmployee);
 
 

@@ -1,5 +1,6 @@
 package website.controller;
 
+import java.security.Principal;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +45,7 @@ public class LogWorkController {
   }
 
   @GetMapping("/{businessTag}/logWork")
-  String logWork(@PathVariable final String businessTag, Model model) {
+  String logWork(Principal principal, @PathVariable final String businessTag, Model model) {
     model.addAttribute("businessTag", businessTag);
 
     // use API to get all clients for this business
@@ -54,8 +55,8 @@ public class LogWorkController {
     // if method has been called with an existing workLog use it
     if (!model.containsAttribute("workLog")) {
       WorkLog workLog = new WorkLog();
-      // TODO: Needs to use Authentication solution to get current userName
-      workLog.setUserName("Default");
+      
+      workLog.setUserName(principal.getName());
       model.addAttribute("workLog", workLog);
     }
 
@@ -66,12 +67,14 @@ public class LogWorkController {
   }
 
   @PostMapping("/{businessTag}/logWork")
-  public String addWorkLog(@PathVariable final String businessTag, Model model,
+  public String addWorkLog(Principal principal, @PathVariable final String businessTag, Model model,
       @ModelAttribute("workLog") @Validated WorkLog workLog, BindingResult bindingResult,
       RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
-      return logWork(businessTag, model);
+        return "redirect:/" + businessTag + "/logWork";
     }
+    
+    workLog.setUserName(principal.getName());
 
     // use API to add new workLog
     ResponseEntity<String> response = workLogService.addWorkLog(businessTag, workLog);
@@ -79,7 +82,7 @@ public class LogWorkController {
     if (response.getStatusCode() == HttpStatus.BAD_REQUEST) {
       // Report the failure to the user.
       model.addAttribute("addWorkLogError", response.getBody());
-      return logWork(businessTag, model);
+      return "redirect:/" + businessTag + "/logWork";
     }
 
     // Report success to the user.
