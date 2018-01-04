@@ -1,6 +1,6 @@
 package website.controller;
 
-import java.util.Set;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import website.config.WebMvcConfig;
+import website.model.Client;
 import website.model.WorkLog;
 import website.service.ClientService;
 import website.service.WorkLogService;
@@ -47,7 +48,7 @@ public class LogWorkController {
     model.addAttribute("businessTag", businessTag);
 
     // use API to get all clients for this business
-    Set<?> clients = clientService.getClients(businessTag);
+    Collection<Client> clients = clientService.getClients(businessTag);
     model.addAttribute("clients", clients);
 
     // if method has been called with an existing workLog use it

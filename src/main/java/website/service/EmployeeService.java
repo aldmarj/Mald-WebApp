@@ -4,8 +4,7 @@
 package website.service;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -39,14 +38,14 @@ public class EmployeeService extends BaseService
         return new HashSet<>(Arrays.asList(response));
     }
 	
-	public Set<Employee> getTopEmployees(String businessTag) {
+    public Collection<Employee> getTopEmployees(String businessTag) {
         Employee[] response = restTemplate
                 .getForObject("/business/{businessTag}/employee/mostWorked/top/1/10/between/10/20",
                         Employee[].class,
                         businessTag
                 );
 
-        return new HashSet<>(Arrays.asList(response));
+        return Arrays.asList(response);
     }
     
     /**

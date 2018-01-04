@@ -5,12 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import website.model.Client;
+import website.model.Employee;
+import website.model.WorkLog;
 import website.service.ClientService;
 import website.service.EmployeeService;
 import website.service.WorkLogService;
 
-
-import java.util.Set;
+import java.util.Collection;
 
 @Controller
 public class DashboardController {
@@ -30,14 +32,13 @@ public class DashboardController {
     public String dashboard(@PathVariable final String businessTag, Model model) {
         model.addAttribute("businessTag", businessTag);
 
-        Set<?> clients = clientService.getClients(businessTag);
+        Collection<Client> clients = clientService.getClients(businessTag);
         model.addAttribute("clients", clients);
 
-
-        Set<?> worklog = worklogService.getWorklogs(businessTag);
+        Collection<WorkLog> worklog = worklogService.getWorklogs(businessTag);
         model.addAttribute("worklog", worklog);
 
-        Set<?> topEmployee = employeeService.getTopEmployees(businessTag);
+        Collection<Employee> topEmployee = employeeService.getTopEmployees(businessTag);
         model.addAttribute("topEmployee", topEmployee);
 
 
