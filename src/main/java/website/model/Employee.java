@@ -3,6 +3,8 @@ package website.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import website.utils.DateUtils;
+
 /**
  * Model class to model and handle conversion between json.
  * The Json uses getters and setter to modify the model so they are all needed.
@@ -30,7 +32,7 @@ public class Employee
     /** A optional field to return an amount of hours worked. Used
      * for dashboard purposes.
      **/
-	private int hoursWorked;
+	private long hoursWorked;
 	
     /** A optional field to request a password. Used for
      * the post request.
@@ -154,10 +156,10 @@ public class Employee
 	
     public int getHoursWorked() 
     {
-		return hoursWorked;
+		return DateUtils.convertMillitoHours(hoursWorked);
 	}
 
-	public void setHoursWorked(int hoursWorked) 
+	public void setHoursWorked(long hoursWorked) 
 	{
 		this.hoursWorked = hoursWorked;
 	}
