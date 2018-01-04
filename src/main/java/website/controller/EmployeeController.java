@@ -69,6 +69,12 @@ public class EmployeeController {
     {
     	 employee.setBusinessTag(businessTag);
     	 
+    	 if (employee.getParentUserName() != null 
+    			 && employee.getParentUserName().isEmpty())
+    	 {
+    		 employee.setParentUserName(null);
+    	 }
+    	 
  		// Attempt to add the business
          ResponseEntity<String> response = employeeService.addEmployee(employee);
          if(response.getStatusCode() == HttpStatus.BAD_REQUEST)

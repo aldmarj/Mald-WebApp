@@ -8,14 +8,13 @@ import website.model.Client;
 
 @Component
 public class ClientValidator implements Validator {
+  @Override
+  public boolean supports(Class<?> clazz) {
+    return clazz.equals(Client.class);
+  }
 
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return clazz.equals(Client.class);
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientName", "clientName.empty");
-    }
+  @Override
+  public void validate(Object target, Errors errors) {
+    ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientName", "clientName.empty");
+  }
 }

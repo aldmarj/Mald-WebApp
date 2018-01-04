@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import website.model.Employee;
+import website.utils.DateUtils;
 
 /**
  * Employee services for talking to the API regarding employees.
@@ -44,11 +45,17 @@ public class EmployeeService extends BaseService
      * @param businessTag - The business context,
      * @return the employees of have worked the most for a time frame. Most first.
      */
-    public Collection<Employee> getTopEmployees(String businessTag) {
+    public Collection<Employee> getTopNEmployeesForCurrentMonth(String businessTag, int n) {    	
+    	long startMonth = DateUtils.getStartOfCurrentMonthInMillis();
+    	long endMonth = DateUtils.getEndOfCurrentMonthInMillis();
+    	
         Employee[] response = restTemplate
-                .getForObject("/business/{businessTag}/employee/mostWorked/top/1/10/between/10/20",
+                .getForObject("/business/{businessTag}/employee/mostWorked/top/1/{n}/between/{startMonth}/{endMonth}",
                         Employee[].class,
-                        businessTag
+                        businessTag,
+                        n,
+                        startMonth,
+                        endMonth
                 );
 
         return Arrays.asList(response);

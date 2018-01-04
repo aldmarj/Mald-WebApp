@@ -2,7 +2,6 @@ package website.service;
 
 import java.util.Arrays;
 import java.util.Collection;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,16 +22,12 @@ public class ClientService extends BaseService {
     return Arrays.asList(response);
   }
 
-    public ResponseEntity<String> addClient(String businessTag, Client client)
-    {
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Client> request = new HttpEntity<Client>(client, headers);
-        ResponseEntity<String> response =
-                restTemplate.exchange("/business/{businessTag}/client", HttpMethod.POST,
-                        request, String.class, businessTag);
-        return response;
-    }
-
-
-
+  public ResponseEntity<String> addClient(String businessTag, Client client) {
+    HttpHeaders headers = new HttpHeaders();
+    HttpEntity<Client> request = new HttpEntity<Client>(client, headers);
+    ResponseEntity<String> response =
+        restTemplate.exchange("/business/{businessTag}/client", HttpMethod.POST,
+            request, String.class, businessTag);
+    return response;
+  }
 }
