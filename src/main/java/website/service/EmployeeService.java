@@ -27,7 +27,7 @@ public class EmployeeService extends BaseService
 	 * 
 	 * @return a list of all the employees for a business.
 	 */
-    public Set<Employee> getEmployees(String businessTag)
+    public Collection<Employee> getEmployees(String businessTag)
     {
     	Employee[] response = restTemplate
                 .getForObject("/business/{businessTag}/employee",
@@ -35,9 +35,15 @@ public class EmployeeService extends BaseService
                 		businessTag
                 );
 
-        return new HashSet<>(Arrays.asList(response));
+        return Arrays.asList(response);
     }
 	
+    /**
+     * Get the employees who have worked the most for a time frame.
+     * 
+     * @param businessTag - The business context,
+     * @return the employees of have worked the most for a time frame. Most first.
+     */
     public Collection<Employee> getTopEmployees(String businessTag) {
         Employee[] response = restTemplate
                 .getForObject("/business/{businessTag}/employee/mostWorked/top/1/10/between/10/20",

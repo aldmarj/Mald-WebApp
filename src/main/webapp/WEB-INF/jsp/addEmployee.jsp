@@ -24,6 +24,11 @@
 	<title>Add an Employee</title>
 </head>
 <body>
+<ol class="breadcrumb">
+    <li><a href="/${businessTag}">Dashboard</a></li>
+    <li class="active">Add New Employee</li>
+</ol>
+
 <div class="container" id="formGroup">
     <c:if test="${not empty error}">
 		<div class="alert alert-danger">
