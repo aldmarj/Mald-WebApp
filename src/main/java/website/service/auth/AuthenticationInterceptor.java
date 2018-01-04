@@ -10,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Objects;
 
 /**
  * ClientRequestInterceptor that adds the current users token to the request before it is sent to the API server.

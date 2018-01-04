@@ -11,7 +11,7 @@
     <script src='${pageContext.request.contextPath}/webjars/jquery/jquery.js'></script>
     <script src='${pageContext.request.contextPath}/webjars/momentjs/moment.js'></script>
     <script src='${pageContext.request.contextPath}/webjars/Eonasdan-bootstrap-datetimepicker/js/bootstrap-datetimepicker.js'></script>
-    <style rel="stylesheet">
+    <style>
         .datetimepicker {
             width: 200px;
         }
