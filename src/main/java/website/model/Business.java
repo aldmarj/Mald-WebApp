@@ -15,6 +15,9 @@ public class Business
     /** The full name of the business */
     private String businessName;
     
+    /** The initial employee of the business **/
+	private Employee initialEmployee;
+    
     /**
      * CLASS CONSTRUCTOR
      */
@@ -75,4 +78,24 @@ public class Business
     {
         this.businessTag = businessTag;
     }
+    
+    /**
+     * Getter for the initial employee.
+     * 
+     * @return the initial employee.
+     */
+    public Employee getInitialEmployee() 
+    {
+		return initialEmployee;
+	}
+
+    /**
+     * Setter for the initial employee.
+     * 
+     * @param defaultEmployee the initial employee to set.
+     */
+	public void setInitialEmployee(Employee initialEmployee) 
+	{
+		this.initialEmployee = initialEmployee;
+	}
 }

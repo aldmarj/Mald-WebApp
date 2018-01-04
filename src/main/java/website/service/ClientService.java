@@ -1,8 +1,7 @@
 package website.service;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,14 +12,14 @@ import website.model.Client;
 @Service
 public class ClientService extends BaseService {
 
-  public Set<Client> getClients(String businessTag) {
+  public Collection<Client> getClients(String businessTag) {
     Client[] response = restTemplate
         .getForObject("/business/{businessTag}/client/",
             Client[].class,
             businessTag
         );
 
-    return new HashSet<>(Arrays.asList(response));
+    return Arrays.asList(response);
   }
 
   public ResponseEntity<String> addClient(String businessTag, Client client)

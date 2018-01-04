@@ -31,16 +31,30 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.10" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.12.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.12.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.12.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.12.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-security:1.5.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:4.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-jasper:8.5.23" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.23" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:8.5.23" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.23" />
+          <element id="library" level="project" name="Maven: org.eclipse.jdt:ecj:3.12.3" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.12.RELEASE" />
+          <element id="library" level="project" name="Maven: org.webjars:jquery:2.1.4" />
+          <element id="library" level="project" name="Maven: org.webjars:bootstrap:3.3.7-1" />
+          <element id="library" level="project" name="Maven: org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47" />
+          <element id="library" level="project" name="Maven: org.webjars:momentjs:2.19.3" />
+          <element id="library" level="project" name="Maven: org.webjars:webjars-locator:0.32-1" />
+          <element id="library" level="project" name="Maven: org.webjars:webjars-locator-core:0.32" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.1" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-compress:1.9" />
         </element>
       </element>
       <element id="directory" name="META-INF">
