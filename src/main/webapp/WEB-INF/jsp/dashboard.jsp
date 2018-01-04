@@ -95,8 +95,16 @@
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2 class="panel-title">Top Employee</h2>
+                	<div class="row">
+                        <div class="col-md-6">
+                    		<h2 class="panel-title">Top Employees</h2>  
+                    	</div>              
+		                <div class="col-md-6">
+		                	<a type="button" class="btn btn-success pull-right" href="/${businessTag}/addEmployee">New Employee</a>
+		                </div>
+		        	</div>
                 </div>
+
                 <div class="panel-body mypanel">
                     <table id="topEmployee-table" class="table table-striped">
                         <thead>

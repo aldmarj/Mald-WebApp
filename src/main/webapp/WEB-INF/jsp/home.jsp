@@ -5,9 +5,20 @@
 	
 <html>
 <head>
-<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
-<script src='webjars/jquery/jquery.min.js'></script>
-
+	<link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+	<script src='webjars/jquery/jquery.min.js'></script>
+    <style>
+        .left {
+            float: left;
+            width: 45%;
+        }
+        .right {
+             margin-left: 50%;
+        }
+        .submitButton {
+		float: right;
+		}
+    </style>
 </head>
 <body>
 	<div class="container">
@@ -19,6 +30,48 @@
 	    </c:if>       
 	
 		<h2>Employee Management System</h2>
+		
+		<p>Join us today!</p>
+        <form:form method="POST" action="/" modelAttribute="business">
+        	<section>
+				<div class="left">
+				     <p>New Business Details </p>
+		             <div class="form-group">
+							<form:label path="businessName">Name</form:label>
+		                    <form:input path="businessName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="businessTag">Tag</form:label>
+		                    <form:input path="businessTag" class="form-control"/>
+					 </div>
+  			 	</div>
+  				<div class="right">
+  					<p>Initial User Details</p>
+  					 <div class="form-group">
+							<form:label path="initialEmployee.account.userName">User Name</form:label>
+		                    <form:input path="initialEmployee.account.userName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="initialEmployee.firstName">First Name</form:label>
+		                    <form:input path="initialEmployee.firstName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="initialEmployee.surName">Sur Name</form:label>
+		                    <form:input path="initialEmployee.surName" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="initialEmployee.jobRole">Job Role</form:label>
+		                    <form:input path="initialEmployee.jobRole" class="form-control"/>
+					 </div>
+					 <div class="form-group">
+		                    <form:label path="initialEmployee.requestedPassword">Password</form:label>
+		                    <form:password path="initialEmployee.requestedPassword" class="form-control"/>
+					 </div>
+  				</div>
+       		</section>
+       		<button type="submit" class="btn btn-default submitButton">Submit</button>
+        </form:form>  
+	
 		<p>Welcome to the Employee Management System! We currently support:</p>
 
 		<table id="business-table" class="table table-striped">
@@ -43,19 +96,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		
-		<p>Join us today!</p>
-        <form:form method="POST" action="/businesses" modelAttribute="business">
-             <div class="form-group">
-					<form:label path="businessName">Name</form:label>
-                    <form:input path="businessName" class="form-control"/>
-			 </div>
-			 <div class="form-group">
-                    <form:label path="businessTag">Tag</form:label>
-                    <form:input path="businessTag" class="form-control"/>
-			 </div>
-  			 <button type="submit" class="btn btn-default">Submit</button>
-        </form:form>
 	</div>
 </body>
 </html>

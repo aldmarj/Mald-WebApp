@@ -3,61 +3,184 @@ package website.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Model class to model and handle conversion between json.
+ * The Json uses getters and setter to modify the model so they are all needed.
+ * 
+ * @author Lawrence
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Employee {
-
+public class Employee
+{
+	/** The first name of the employee. **/
     private String firstName;
 
+	/** The surname of the employee. **/
     private String surName;
 
-    private int hoursWorked;
+	/** The manager of the employee's username. **/
+    private String parentUserName;
 
-    private String businessTag;
+	/** A description of the employees role. **/
+    private String jobRole;
 
-    public Employee() {
-        this.hoursWorked = -1;
-        this.firstName = "";
-        this.surName = "";
-        this.businessTag = "";
+    /** The account details of the employee. **/
+    private Account account;
+
+    /** A optional field to return an amount of hours worked. Used
+     * for dashboard purposes.
+     **/
+	private int hoursWorked;
+	
+    /** A optional field to request a password. Used for
+     * the post request.
+	 **/
+	private String requestedPassword;
+
+	/**
+	 * CLASS CONSTRUCTOR
+	 */
+	public Employee()
+    {
+		this(new Account(), "", "", null, "", -1);
     }
-
-    public Employee(final String firstName, final String surName, final String businessTag, final int hoursWorked) {
-        this.firstName = firstName;
-        this.surName = surName;
-        this.businessTag = businessTag;
+	
+	/**
+	 * CLASS CONSTRUCTOR
+	 * 
+	 * @param account - The account details of the employee.
+	 * @param firstName - The first name of the employee.
+	 * @param surName - The surname of the employee.
+	 * @param parentUserName - The username of the employee.
+	 * @param jobRole - A description of the employees job role.
+	 */
+    public Employee(final Account account, final String firstName, final String surName,
+            final String parentUserName, final String jobRole)
+	{
+        this(account, firstName, surName, parentUserName, jobRole, -1);
+	}
+    
+	/**
+	 * CLASS CONSTRUCTOR
+	 * 
+	 * @param account - The account details of the employee.
+	 * @param firstName - The first name of the employee.
+	 * @param surName - The surname of the employee.
+	 * @param parentUserName - The username of the employee.
+	 * @param jobRole - A description of the employees job role.
+	 * @param hoursworked - The number of hours worked by the employee.
+	 */
+    public Employee(final Account account, final String firstName, final String surName,
+                    final String parentUserName, final String jobRole, final Integer hoursWorked)
+    {
+		this.account = account;
+		this.firstName = firstName;
+		this.surName = surName;
+		this.parentUserName = parentUserName;
+		this.jobRole = jobRole;
         this.hoursWorked = hoursWorked;
+        this.requestedPassword = null;
     }
 
-
-    public String getFirstName() {
-        return firstName;
+    public String getFirstName()
+    {
+        return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getSurName()
+    {
+        return this.surName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getBusinessTag()
+    {
+        return this.account.getBusinessTag();
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public String getParentUserName()
+    {
+        return this.parentUserName;
+    }
+    
+    public boolean hasParent()
+    {
+    	return this.parentUserName != null;
     }
 
-    public int getHoursWorked() {
-        return hoursWorked;
+    public String getJobRole()
+    {
+        return this.jobRole;
+    }
+    
+    public String getUserName()
+    {
+        return this.account.getUserName();
+    }
+    
+    public Account getAccount()
+    {
+    	return this.account;
     }
 
-    public void setHoursWorked(int hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
 
-    public String getBusinessTag() {
-        return businessTag;
-    }
+	public void setSurName(String surName)
+	{
+		this.surName = surName;
+	}
 
-    public void setBusinessTag(String businessTag) {
-        this.businessTag = businessTag;
-    }
+	public void setBusinessTag(String businessTag)
+	{
+		this.account.setBusinessTag(businessTag);
+	}
+
+	public void setParentUserName(String parentUserName)
+	{
+		this.parentUserName = parentUserName;
+	}
+
+	public void setJobRole(String jobRole) 
+	{
+		this.jobRole = jobRole;
+	}
+
+	public void setAccount(Account account) 
+	{
+		this.account = account;
+	} 
+	
+    public int getHoursWorked() 
+    {
+		return hoursWorked;
+	}
+
+	public void setHoursWorked(int hoursWorked) 
+	{
+		this.hoursWorked = hoursWorked;
+	}
+	
+	public String getRequestedPassword() 
+	{
+		return requestedPassword;
+	}
+
+	public void setRequestedPassword(String requestedPassword) 
+	{
+		this.requestedPassword = requestedPassword;
+	}
+	
+	/**
+	 * Check to see if the employee is valid.
+	 * 
+	 * @return true if the employee is valid.
+	 */
+	public boolean isValid()
+	{
+		return (!this.getBusinessTag().isEmpty() 
+				&& this.account != null
+				&& this.account.isValid());
+	}
 }

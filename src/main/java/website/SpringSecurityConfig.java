@@ -26,7 +26,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
     private static final String[] PERMITTED_URLS = new String[]
     {
         "/",
-        "/businesses",
         "/webjars/**",
         "/*/login",
         "/error",
@@ -36,7 +35,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
     private static final String[] SHARED_BUSINESSES = new String[]
     {
         "",
-        "businesses",
         "webjars",
         "error",
         "health"
@@ -56,7 +54,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
                     .and()
                 .formLogin()
                     .authenticationDetailsSource(r -> BusinessTagUtils.getBusinessTag(r.getRequestURI()))
-                    .defaultSuccessUrl("/businesses",false)
+                    .defaultSuccessUrl("/",false)
                     .failureHandler(new BusinessAuthFailureHandler())
                     .loginProcessingUrl("/*/login")
                     .permitAll()
