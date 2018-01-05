@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>distributed-mald</groupId>
@@ -22,6 +23,8 @@
     <org.eclipse.jetty>9.4.7.v20170914</org.eclipse.jetty>
     <jquery.version>2.1.4</jquery.version>
     <bootstrap.version>3.3.7-1</bootstrap.version>
+    <bootstrap-datetimepicker.version>4.17.47</bootstrap-datetimepicker.version>
+    <momentjs.version>2.19.3</momentjs.version>
   </properties>
 
   <dependencies>
@@ -32,6 +35,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
     <dependency>
@@ -48,30 +57,42 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    
-    <dependency>
-	    <groupId>org.webjars</groupId>
-	    <artifactId>jquery</artifactId>
-	    <version>${jquery.version}</version>
-	</dependency>
-    
-	<dependency>
-	    <groupId>org.webjars</groupId>
-	    <artifactId>bootstrap</artifactId>
-	    <version>${bootstrap.version}</version>
-	    <exclusions>
-	        <exclusion>
-	            <groupId>org.webjars</groupId>
-	            <artifactId>jquery</artifactId>
-	        </exclusion>
-    </exclusions>
-	</dependency>
 
-	<dependency>
-        <groupId>org.webjars</groupId>
-        <artifactId>webjars-locator</artifactId>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>${jquery.version}</version>
     </dependency>
-	
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>${bootstrap.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.webjars</groupId>
+          <artifactId>jquery</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>Eonasdan-bootstrap-datetimepicker</artifactId>
+      <version>${bootstrap-datetimepicker.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>momentjs</artifactId>
+      <version>${momentjs.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>webjars-locator</artifactId>
+    </dependency>
+
   </dependencies>
 
   <build>

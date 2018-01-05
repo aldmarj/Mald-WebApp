@@ -1,0 +1,43 @@
+{
+	"info": {
+		"name": "mald-website",
+		"_postman_id": "2f2e6cd3-7a4f-e065-3d1f-3501d9dfc602",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function ()",
+							"{",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://mald.domhoney.com",
+					"protocol": "https",
+					"host": [
+						"mald",
+						"domhoney",
+						"com"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
