@@ -22,8 +22,7 @@ public class ClientService extends BaseService {
     return Arrays.asList(response);
   }
 
-  public ResponseEntity<String> addClient(String businessTag, Client client)
-  {
+  public ResponseEntity<String> addClient(String businessTag, Client client) {
     HttpHeaders headers = new HttpHeaders();
     HttpEntity<Client> request = new HttpEntity<Client>(client, headers);
     ResponseEntity<String> response =
@@ -31,6 +30,4 @@ public class ClientService extends BaseService {
             request, String.class, businessTag);
     return response;
   }
-
-
 }
