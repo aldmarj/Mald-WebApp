@@ -64,7 +64,7 @@
 
                     });
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    //alert('Geocode was not successful for the following reason: ' + status);
                 }
             });
 
@@ -97,7 +97,7 @@
                 <div class="panel-heading">
                 	<div class="row">
                         <div class="col-md-6">
-                    		<h2 class="panel-title">Top Employees</h2>  
+                    		<h2 class="panel-title">Top Employees this month</h2>  
                     	</div>              
 		                <div class="col-md-6">
 		                	<a type="button" class="btn btn-success pull-right" href="/${businessTag}/addEmployee">New Employee</a>
@@ -193,7 +193,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-6">
-                            <h2 class="panel-title">Work Log</h2>
+                            <h2 class="panel-title">Work Logs this week</h2>
                         </div>
                         <div class="col-md-6">
                             <a type="button" class="btn btn-success pull-right" href="/${businessTag}/logWork">New Work Entry</a>
@@ -204,7 +204,7 @@
                     <table id="worklog-table" class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Client ID</th>
+                            <th>User</th>
                             <th>Description</th>
                             <th>Start Time</th>
                             <th>End Time</th>
@@ -214,13 +214,7 @@
                         <c:forEach items="${worklog}" var="worklog">
                             <tr>
                                 <td>
-                                    <c:forEach items="${clients}" var="client">
-                                        <c:set var="clientId" scope="session" value="${worklog.getClientId()}"/>
-                                        <c:set var="clientName" scope="session" value="${client.getClientId()}"/>
-                                        <c:if test="${clientId == clientName}">
-                                            <c:out value="${client.getClientName()}"/>
-                                        </c:if>
-                                    </c:forEach>
+                                    <c:out value="${worklog.getUserName()}"/>
                                 </td>
                                 <td>
                                     <c:out value="${worklog.getDescription()}"/>
