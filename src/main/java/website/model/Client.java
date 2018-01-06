@@ -2,18 +2,33 @@ package website.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import website.utils.DateUtils;
 
+import java.util.List;
+
+/**
+ * Model for client information.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
+	
+	/** The business context of the client **/
     private String businessTag;
+    
+    /** The unique id of the client **/
     private Integer clientId;
+    
+    /** The name of the client **/
     private String clientName;
+    
+    /** The locations associated with the client **/
     private List<Locations> locations = null;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
+    
+    /** A optional field to return an amount of hours worked. Used
+     * for dashboard purposes.
+     **/
+    private Long hoursWorked;
+    
     public String getBusinessTag() {
         return businessTag;
     }
@@ -65,17 +80,12 @@ public class Client {
         this.locations = locations;
         return this;
     }
+    
+    public int getHoursWorked() {
+		return DateUtils.convertMillitoHours(hoursWorked);
+	}
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
-    public Client withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
+	public void setHoursWorked(Long hoursWorked) {
+		this.hoursWorked = hoursWorked;
+	}
 }
