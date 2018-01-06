@@ -6,13 +6,26 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import website.model.WorkLog;
+import website.utils.DateUtils;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
+/**
+ * Employee services for talking to the API regarding worklogs.
+ * 
+ * @author Lawrence
+ */
 @Service
 public class WorkLogService extends BaseService {
+	
+	/**
+	 * Add a worklog to the API.
+	 * 
+	 * @param businessTag - The business context.
+	 * @param workLog - The worklog to add.
+	 * @return the responce.
+	 */
     public ResponseEntity<String> addWorkLog(String businessTag, WorkLog workLog) {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<WorkLog> request = new HttpEntity<WorkLog>(workLog, headers);
@@ -22,14 +35,25 @@ public class WorkLogService extends BaseService {
         return response;
     }
 
-    public Set<WorkLog> getWorklogs(String businessTag) {
+    /**
+     * Get all the worklogs for the current week.
+     * 
+     * @param businessTag - The business context.
+     * @return the worklogs.
+     */
+    public Collection<WorkLog> getWorklogs(String businessTag) {
+    	long startDay = DateUtils.getStartOfCurrentDayInMillis();
+    	long endDay = DateUtils.getEndOfCurrentDayInMillis();
+    	
         WorkLog[] response = restTemplate
-                .getForObject("/business/{businessTag}/worklog/range/0/1",
+                .getForObject("/business/{businessTag}/worklog/range/{startDay}/{endDay}",
                         WorkLog[].class,
-                        businessTag
+                        businessTag,
+                        startDay,
+                        endDay
                 );
 
-        return new HashSet<>(Arrays.asList(response));
+        return Arrays.asList(response);
     }
 
 }

@@ -2,7 +2,10 @@ package website.service;
 
 import java.util.Arrays;
 import java.util.Collection;
-
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import website.model.Client;
 import website.utils.DateUtils;
@@ -28,7 +31,7 @@ public class ClientService extends BaseService {
     return Arrays.asList(response);
   }
 
-  /**
+ /**
    * Get the employees who have worked the most for a time frame.
    * 
    * @param businessTag - The business context,
@@ -48,5 +51,15 @@ public class ClientService extends BaseService {
               );
 
       return Arrays.asList(response);
+  }
+
+  
+    public ResponseEntity<String> addClient(String businessTag, Client client) {
+	    HttpHeaders headers = new HttpHeaders();
+	    HttpEntity<Client> request = new HttpEntity<Client>(client, headers);
+	    ResponseEntity<String> response =
+	        restTemplate.exchange("/business/{businessTag}/client", HttpMethod.POST,
+	            request, String.class, businessTag);
+	    return response;
   }
 }

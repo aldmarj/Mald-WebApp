@@ -5,7 +5,7 @@ target/
 .idea/**/libraries
 *.iml
 
-# User-specific stuff:
+# User specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
@@ -18,3 +18,6 @@ target/
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+
+# Not using IntelliJ artifacts for run configurations
+.idea/artifacts/

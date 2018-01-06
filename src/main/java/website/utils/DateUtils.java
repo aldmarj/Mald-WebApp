@@ -26,6 +26,22 @@ public abstract class DateUtils {
     	calendar.set(year, month, 0, 0, 0, 0);
     	return calendar.getTimeInMillis();
 	}
+	
+	/**
+	 * Get the start of the current day in milliseconds.
+	 * 
+	 * @return the start of the current day.
+	 */
+	public static long getStartOfCurrentDayInMillis() {
+    	Calendar calendar = Calendar.getInstance();
+    
+    	int year = calendar.get(Calendar.YEAR);
+    	int month = calendar.get(Calendar.MONTH);
+    	int day = calendar.get(Calendar.DATE - 1);
+    
+    	calendar.set(year, month, day, 0, 0, 0);
+    	return calendar.getTimeInMillis();
+	}
 		
 	/**
 	 * Get the end of the current month in milliseconds.
@@ -39,6 +55,22 @@ public abstract class DateUtils {
         int month = calendar.get(Calendar.MONTH + 1);
         
         calendar.set(year, month, 0, 0, 0, 0);
+        return calendar.getTimeInMillis();
+	}
+	
+	/**
+	 * Get the end of the current month in milliseconds.
+	 * 
+	 * @return the end of the current month.
+	 */
+	public static long getEndOfCurrentDayInMillis() {
+        Calendar calendar = Calendar.getInstance();
+        
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DATE);
+        
+        calendar.set(year, month, day, 0, 0, 0);
         return calendar.getTimeInMillis();
 	}
 	
