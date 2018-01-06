@@ -32,7 +32,8 @@ public class DashboardController {
     public String dashboard(@PathVariable final String businessTag, Model model) {
         model.addAttribute("businessTag", businessTag);
 
-        Collection<Client> clients = clientService.getClients(businessTag);
+        Collection<Client> clients = 
+        		clientService.getTopNClientsForCurrentMonth(businessTag, 10);
         model.addAttribute("clients", clients);
 
         Collection<WorkLog> worklog = worklogService.getWorklogs(businessTag);

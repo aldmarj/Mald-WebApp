@@ -138,7 +138,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-6">
-                            <h2 class="panel-title">Clients</h2>
+                            <h2 class="panel-title">Top Clients this month</h2>
                         </div>
                         <div class="col-md-6">
                             <a type="button" class="btn btn-success pull-right" href="/${businessTag}/addClient">New Client</a>
@@ -150,18 +150,15 @@
                     <table id="client-table" class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Client ID</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Postcode</th>
+                            <th>Hours Worked</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${clients}" var="clients">
                             <tr>
-                                <td>
-                                    <c:out value="${clients.getClientId()}"/>
-                                </td>
                                 <td>
                                     <c:out value="${clients.getClientName()}"/>
                                 </td>
@@ -176,6 +173,9 @@
                                     <c:if test="${size != 0}">
                                         <c:out value="${clients.getLocations().get(0).getPostCode()}"/>
                                     </c:if>
+                                </td>
+                                <td>
+                                    <c:out value="${clients.getHoursWorked()}"/>
                                 </td>
                             </tr>
                         </c:forEach>
