@@ -1,4 +1,4 @@
-package website;
+package website.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
     private static final String[] PERMITTED_URLS = new String[]
     {
