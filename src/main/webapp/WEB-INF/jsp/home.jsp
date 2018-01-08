@@ -29,7 +29,7 @@
 			</div>
 	    </c:if>       
 	
-		<h2>Employee Management System</h2>
+		<h2>Hi David & Andy! I made this change for the demo</h2>
 		
 		<p>Join us today!</p>
         <form:form method="POST" action="/" modelAttribute="business">
